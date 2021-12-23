@@ -1,0 +1,12 @@
+User-agent: * 
+Allow: /
+Allow: /archives/
+DisAllow: /about/
+DisAllow: /galleries/
+DisAllow: /tags/
+DisAllow: /categories/
+DisAllow: /contact/
+Disallow: /css/
+
+Sitemap: http://lskjwp.gitee.io/sitemap.xml
+Sitemap: http://lskjwp.gitee.io/baidusitemap.xml

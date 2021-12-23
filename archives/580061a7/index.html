@@ -1,0 +1,2405 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="code-p6MPyNrcYn">
+    <meta charset="utf-8">
+    <meta name="keywords" content="SpringCloud学习笔记, HTML,CSS,JavaScript,JQuery,Java,Vue,学习笔记,生活随笔">
+    <meta name="description" content="关闭一扇窗，另一扇等着你打开！往事如烟，浅笑而安。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>SpringCloud学习笔记 | lskj</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+<style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+    
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+    
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+    
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+    
+   
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="lskj" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+    
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+    
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+    
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+    
+   
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+
+
+ <div id="loading-container">
+     <p class="loading-text">玩命加载中 . . . </p> 
+     <div class="loading-image">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div> 
+         <div></div>
+     </div>
+ </div><body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--动态背景-->
+    <!-- <div id="bg"><canvas></canvas><canvas></canvas><canvas></canvas></div>
+    <script src="/js/canva_moving_effect.js"></script> -->
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lskj</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/galleries" class="waves-effect waves-light">
+      
+      <i class="fas fa-image" style="zoom: 0.6;"></i>
+      
+      <span>相册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/navigate" class="waves-effect waves-light">
+      
+      <i class="fas fa-location-arrow" style="zoom: 0.6;"></i>
+      
+      <span>导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <!--全屏-->
+  <li id="fullscreen_li" class="fullscreen"><a href="javascript:void(0);" class="modal-trigger waves-effect waves-light"><i id="fullscreen" class="fas fa-expand-arrows-alt" title="全屏" style="zoom: 0.65;"></i></a></li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lskj</div>
+        <div class="logo-desc">
+            
+            关闭一扇窗，另一扇等着你打开！往事如烟，浅笑而安。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/galleries" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-image"></i>
+			
+			相册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/navigate" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-location-arrow"></i>
+			
+			导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<!-- <div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lskjwp/image/imageCover/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.jpg')"> -->
+    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">SpringCloud学习笔记</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+        background-color: rgb(255, 255, 255,0.7);
+        border-radius: 10px;
+        box-shadow: 0 10px 35px 2px rgba(0, 0, 0, .15), 0 5px 15px rgba(0, 0, 0, .07), 0 2px 5px -5px rgba(0, 0, 0, .1) !important;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        background: linear-gradient(to bottom right,#61B5F3 0%, #26D6D1 100%);
+        width: 35px;
+        height: 35px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 35px;
+        position: absolute;
+        right: 0px;
+        /* font-size: 1.4rem; */
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/SpringCloud/">
+                                <span class="chip bg-color">SpringCloud</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/SpringCloud/" class="post-category">
+                                SpringCloud
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:
+                    2021-05-13
+                </div>
+                
+
+                
+
+                <!--添加作者信息--> 
+                <div class="info-break-policy"> 
+                     
+                        <i class="fa fa-pencil"></i> 作者: 勇也很努力
+                     
+                </div>
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:
+                    9.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:
+                    32 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>学习视频链接：<a href="https://www.bilibili.com/video/BV1jJ411S7xr" target="_blank" rel="noopener">遇见狂神说</a>  <a href="https://www.bilibili.com/video/BV18E411x7eT" target="_blank" rel="noopener">尚硅谷</a></p>
+<a id="more"></a>
+
+<p>微服务架构4个核心问题？</p>
+<p>1、服务很多，客户端怎样访问？</p>
+<p>2、这么多服务，服务之间如何通信？</p>
+<p>3、这么多服务，如何治理？</p>
+<p>4、服务挂了，怎么办？</p>
+<p>解决方案：</p>
+<p>SpringCloud生态</p>
+<p>1、Spring Cloud NetFlix，一站式解决方案</p>
+<p>​    api网关，zuul组件</p>
+<p>​    Feign基于HttpClinet，也就是基于Http通信方式</p>
+<p>​    服务注册发现：Eureka</p>
+<p>​    熔断机制：Hystrix</p>
+<p>2、Apache Dubbo Zookeeper，半自动，需要整合别人的</p>
+<p>​    API：没有，找第三方组件，或者自己实现</p>
+<p>​    Dubbo</p>
+<p>​    Zookeeper</p>
+<p>​    没有熔断机制，借助Hystrix</p>
+<p>Dubbo这个方案并不完善</p>
+<p>3、Spring Cloud Alibaba，一站式解决方案，更简单</p>
+<ul>
+<li>API</li>
+<li>HTTP、RPC</li>
+<li>注册和发现</li>
+<li>熔断机制</li>
+</ul>
+<p>新概念：服务网格-&gt;Server Mesh</p>
+<h1 id="微服务概述"><a href="#微服务概述" class="headerlink" title="微服务概述"></a>微服务概述</h1><h2 id="1、什么是微服务"><a href="#1、什么是微服务" class="headerlink" title="1、什么是微服务"></a>1、什么是微服务</h2><p>ThoughtWorks公司的首席科学家Martin Fowler于2014年提出一下的一段话。</p>
+<p>原文：<a href="https://martinfowler.com/articles/microservices.html" target="_blank" rel="noopener">https://martinfowler.com/articles/microservices.html</a></p>
+<p>汉化：<a href="https://www.cnblogs.com/liuning8023/p/4493156.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuning8023/p/4493156.html</a></p>
+<p>通常而言，微服务架构是一种架构模式，或者说是一种架构风格，它提倡将单一的应用程序划分成一组小的服务，每个服务运行在其它独立的自己的进程内，服务之间互相协调，互相配置，为用户提供最终价值。服务之间采用轻量级的通信机制互相沟通，每个服务都围绕着具体的业务进行构建，并且能够被独立的部署到生产环境中，另外，应尽量避免统一的，集中式的服务管理机制，对具体的一个服务而言，应根据业务上下文，选择合适的语言，工具对其进行构建，可以有一个非常轻量级的集中式管理来协调这些服务，可以使用不同的语言来编写服务，也可以使用不同的数据存储。</p>
+<p>从技术维度来理解，微服务化的核心就是将传统的一站式应用，根据业务拆分成一个一个的服务，彻底地去耦合，每一个微服务提供单个业务功能的服务，一个服务做一件事情，从技术角度看就是一种小而独立的处理过程，类似进程的概念，能够自行单独启动或销毁，拥有自己独立的数据库。</p>
+<h2 id="2、微服务与微服务架构"><a href="#2、微服务与微服务架构" class="headerlink" title="2、微服务与微服务架构"></a>2、微服务与微服务架构</h2><p><strong>微服务</strong>强调的是服务的大小，它关注的是某一个点，是具体解决某一个问题，提供对应服务的一个服务应用，狭义上来看，可以看作是IDEA中的一个个微服务工程，或者Moudel。</p>
+<p><strong>微服务架构</strong>是一种架构模式，它提倡将单一的应用程序划分成一组小的服务，服务之间互相协调，互相配合，为用户提供最终价值。每个服务运行在其独立的进程中，服务之间采用轻量级的通信机制互相沟通，每个服务都围绕着具体的业务进行构建，并且能够被独立的部署到生产环境中，另外，应尽量避免统一的，集中式的服务管理机制，对具体的一个服务而言，应根据业务上下文，选择合适的语言，工具对其进行构建。</p>
+<h2 id="3、微服务优缺点"><a href="#3、微服务优缺点" class="headerlink" title="3、微服务优缺点"></a>3、微服务优缺点</h2><p><strong>优点</strong>：</p>
+<ul>
+<li>单一职责原则</li>
+<li>每个服务足够内聚，足够小，代码容易理解，这样能聚焦一个指定的业务功能或业务需求</li>
+<li>开发简单，开发效率提高，一个服务可能就是专一的只干一件事</li>
+<li>微服务能够被小团队单独开发</li>
+<li>微服务是松耦合的，是有功能意义的服务，无论是在开发阶段或部署阶段都是独立的</li>
+<li>微服务能使用不同的语言开发</li>
+<li>易于和第三方集成，微服务允许容易且灵活的方式集成自动部署，通过持续集成工具，如Jenkins、Hudson</li>
+<li>微服务易于被一个开发人员理解，修改和维护，这样小团队能够更关注自己的工作成果。无需通过合作才能够体现价值</li>
+<li>微服务允许利用融合最新技术</li>
+<li><strong>微服务只是业务逻辑代码，不会与HTML、CSS或其他界面混合</strong></li>
+<li><strong>每个微服务都有自己的存储能力，可以有自己的数据库，也可以有统一的数据库</strong></li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>开发人员要处理分布式系统的复杂性</li>
+<li>多服务运维难度，随着服务的增加，运维的压力也在增大</li>
+<li>系统部署依赖</li>
+<li>服务间通信成本</li>
+<li>数据一致性</li>
+<li>系统集成测试</li>
+<li>性能监控</li>
+</ul>
+<h2 id="4、微服务技术栈有哪些"><a href="#4、微服务技术栈有哪些" class="headerlink" title="4、微服务技术栈有哪些"></a>4、微服务技术栈有哪些</h2><table>
+<thead>
+<tr>
+<th align="center">微服务条目</th>
+<th align="center">落地技术</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">服务开发</td>
+<td align="center">SpringBoot，Spring，SpringMVC</td>
+</tr>
+<tr>
+<td align="center">服务配置与管理</td>
+<td align="center">NetFlix公司的Archaius，阿里的Diamond等</td>
+</tr>
+<tr>
+<td align="center">服务注册于发现</td>
+<td align="center">Eureka，Consul，Zookeeper等</td>
+</tr>
+<tr>
+<td align="center">服务调用</td>
+<td align="center">Rest，RPC，gRPC</td>
+</tr>
+<tr>
+<td align="center">服务熔断器</td>
+<td align="center">Hystrix，Envoy等</td>
+</tr>
+<tr>
+<td align="center">负载均衡</td>
+<td align="center">Ribbon，Nginx等</td>
+</tr>
+<tr>
+<td align="center">服务接口调用（客户端调用服务的简化工具）</td>
+<td align="center">Feign等</td>
+</tr>
+<tr>
+<td align="center">消息队列</td>
+<td align="center">Kafka，RabbitMQ，ActiveMQ等</td>
+</tr>
+<tr>
+<td align="center">服务配置中心管理</td>
+<td align="center">SpringCloudConfig，Chef等</td>
+</tr>
+<tr>
+<td align="center">服务路由（API网关）</td>
+<td align="center">Zuul等</td>
+</tr>
+<tr>
+<td align="center">服务监控</td>
+<td align="center">Zabbix，Nagios，Metrics，Specatator等</td>
+</tr>
+<tr>
+<td align="center">全链路追踪</td>
+<td align="center">Zipkin，Brave，Dapper等</td>
+</tr>
+<tr>
+<td align="center">服务部署</td>
+<td align="center">Docker，OpenStack，Kubernetes等</td>
+</tr>
+<tr>
+<td align="center">数据流操作开发包</td>
+<td align="center">SpringCloud Stream（封装于Redis，Rabbit，Kafka等发送接收消息）</td>
+</tr>
+<tr>
+<td align="center">事件消息总栈</td>
+<td align="center">SpringCloud Bus</td>
+</tr>
+</tbody></table>
+<h2 id="5、为什么选择SpringCloud作为微服务架构"><a href="#5、为什么选择SpringCloud作为微服务架构" class="headerlink" title="5、为什么选择SpringCloud作为微服务架构"></a>5、为什么选择SpringCloud作为微服务架构</h2><blockquote>
+<p>选型依据</p>
+</blockquote>
+<ul>
+<li>整体解决方案和框架成熟度</li>
+<li>社区热度</li>
+<li>可维护性</li>
+<li>学习曲线</li>
+</ul>
+<blockquote>
+<p>当前各大IT公司用的微服务架构有哪些？</p>
+</blockquote>
+<ul>
+<li>阿里：dubbo+HFS</li>
+<li>京东：JSF</li>
+<li>新浪：Motan</li>
+<li>当当网：DubboX</li>
+</ul>
+<blockquote>
+<p>各微服务框架对比</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">功能点/服务框架</th>
+<th align="center">Netflix/SpringCloud</th>
+<th align="center">Motan</th>
+<th align="center">gRPC</th>
+<th align="center">Thrift</th>
+<th align="center">Dubbo/DubboX</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">功能定位</td>
+<td align="center">完整的微服务框架</td>
+<td align="center">RPC框架，但整合了ZK或Consul，实现集群环境的基本服务注册/发现</td>
+<td align="center">RPC框架</td>
+<td align="center">RPC框架</td>
+<td align="center">服务框架</td>
+</tr>
+<tr>
+<td align="center">支持Rest</td>
+<td align="center">是，Ribbon支持多种可插拔的序列化选择</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">支持RPC</td>
+<td align="center">否</td>
+<td align="center">是（Hession2）</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center">支持多语言</td>
+<td align="center">是（Rest形式）</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">负载均衡</td>
+<td align="center">是（服务端zuul+客户端Ribbon），zuul-服务，动态路由，云端负载均衡Eureka（针对中间层服务器）</td>
+<td align="center">是（客户端）</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">是（客户端）</td>
+</tr>
+<tr>
+<td align="center">配置服务</td>
+<td align="center">Netfix Archaius，Spring Cloud Config Server集中配置</td>
+<td align="center">是（zookeeper提供）</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">服务调用链监控</td>
+<td align="center">是（zuul），zuul提供边缘服务，API网关</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">高可用/容错</td>
+<td align="center">是（服务端Hystrix+客户端Ribbon）</td>
+<td align="center">是（客户端）</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">是（客户端）</td>
+</tr>
+<tr>
+<td align="center">典型应用案例</td>
+<td align="center">Netflix</td>
+<td align="center">Sina</td>
+<td align="center">Google</td>
+<td align="center">Facebook</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">社区活跃程度</td>
+<td align="center">高</td>
+<td align="center">一般</td>
+<td align="center">高</td>
+<td align="center">一般</td>
+<td align="center">2017你啊后重新开始维护，之前终端5年</td>
+</tr>
+<tr>
+<td align="center">学习难度</td>
+<td align="center">中</td>
+<td align="center">低</td>
+<td align="center">高</td>
+<td align="center">高</td>
+<td align="center">低</td>
+</tr>
+<tr>
+<td align="center">文档丰富程度</td>
+<td align="center">高</td>
+<td align="center">一般</td>
+<td align="center">一般</td>
+<td align="center">一般</td>
+<td align="center">高</td>
+</tr>
+<tr>
+<td align="center">其它</td>
+<td align="center">Spring Cloud Bus为我们的应用程序带来了更多管理端点</td>
+<td align="center">支持降级</td>
+<td align="center">Netflix内部在开发集成gRPC</td>
+<td align="center">IDL定义</td>
+<td align="center">实践的公司比较多</td>
+</tr>
+</tbody></table>
+<h1 id="SpringCloud入门概述"><a href="#SpringCloud入门概述" class="headerlink" title="SpringCloud入门概述"></a>SpringCloud入门概述</h1><h2 id="1、什么是SpringCloud"><a href="#1、什么是SpringCloud" class="headerlink" title="1、什么是SpringCloud"></a>1、什么是SpringCloud</h2><p>SpringCloud，基于SpringBoot提供了一套微服务解决方案，包括服务注册与发现，配置中心，全链路监控，服务网关，负载均衡，熔断器等组件，除了基于NetFlix的开源组件做高度抽象封装之外，还有一些选型中立的开源组件。</p>
+<p>SpringCloud利用SpringBoot的开发便利性，巧妙地简化了分布式系统基础设施的开发，SpringCloud为开发人员提供了快速构建分布式系统的一些工具，<strong>包括配置管理，服务发现，断路器，路由，微代理，事件总栈，全局锁，决策竞选，分布式会话等等</strong>，它们都可以用SpringBoot的开发风格做到一键启动和部署。</p>
+<p>SpringBoot并没有重复造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过SpringBoot风格进行再封装，屏蔽掉了复杂的配置和实现原理，<strong>最终给开发者留出了一套简单易懂，易部署和易维护的分布式系统开发工具包</strong>。</p>
+<p>SpringCloud式分布式微服务架构下的一站式解决方案，是各个微服务架构落地技术的集合体，俗称微服务全家桶。</p>
+<p><img src="/archives/580061a7/cloud-diagram-1a4cad7294b4452864b5ff57175dd983.svg" alt="Spring Cloud diagram"></p>
+<h2 id="2、SpringCloud与SpringBoot的关系"><a href="#2、SpringCloud与SpringBoot的关系" class="headerlink" title="2、SpringCloud与SpringBoot的关系"></a>2、SpringCloud与SpringBoot的关系</h2><ul>
+<li>SpringBoot专注于快速方便的开发单个个体微服务</li>
+<li>SpringCloud是关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理器来，为各个微服务之间提供：配置管理，服务发现，断路器，路由，微代理，事件总栈，全局锁，决策竞选，分布式会话等等集成服务</li>
+<li>SpringBoot可以离开SpringCloud独立使用，开发项目，但是SpringCloud离不开SpringBoot，属于依赖关系</li>
+</ul>
+<p><strong>SpringBoot专注于快速、方便的开发单个个体微服务，SpringCloud关注全局的服务治理框架</strong></p>
+<h2 id="3、Dubbo和SpringCloud技术选型"><a href="#3、Dubbo和SpringCloud技术选型" class="headerlink" title="3、Dubbo和SpringCloud技术选型"></a>3、Dubbo和SpringCloud技术选型</h2><blockquote>
+<p>分布式+服务治理Dubbo</p>
+</blockquote>
+<p>目前成熟的互联网架构：应用服务化拆分+消息中间件</p>
+<blockquote>
+<p>Dubbo于SpringCloud的区别：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">Dubbo</th>
+<th align="center">Spring</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">服务注册中心</td>
+<td align="center">Zookeeper</td>
+<td align="center">Spring Cloud Netflix Eureka</td>
+</tr>
+<tr>
+<td align="center">服务调用方式</td>
+<td align="center">RPC</td>
+<td align="center">REST API</td>
+</tr>
+<tr>
+<td align="center">服务监控</td>
+<td align="center">Dubbo-monitor</td>
+<td align="center">Spring Boot Admin</td>
+</tr>
+<tr>
+<td align="center">断路器</td>
+<td align="center">不完善</td>
+<td align="center">Spring Cloud Netflix Hystrix</td>
+</tr>
+<tr>
+<td align="center">服务网关</td>
+<td align="center">无</td>
+<td align="center">Spring Cloud Netflix Zuul</td>
+</tr>
+<tr>
+<td align="center">分布式配置</td>
+<td align="center">无</td>
+<td align="center">Spring Cloud Config</td>
+</tr>
+<tr>
+<td align="center">服务跟踪</td>
+<td align="center">无</td>
+<td align="center">Spring Cloud Sleuth</td>
+</tr>
+<tr>
+<td align="center">消息总栈</td>
+<td align="center">无</td>
+<td align="center">Spring Cloud Bus</td>
+</tr>
+<tr>
+<td align="center">数据流</td>
+<td align="center">无</td>
+<td align="center">Spring Cloud Stream</td>
+</tr>
+<tr>
+<td align="center">批量任务</td>
+<td align="center">无</td>
+<td align="center">Spring Cloud Task</td>
+</tr>
+</tbody></table>
+<p><strong>最大区别</strong>：SpringCloud抛弃了Dubbo的RPC通信，采用的是基于HTTP的REST方式。</p>
+<p>严格来说，这两种方式各有优劣。虽然从一定程度上来说，后者牺牲了服务调用的性能，但也避免了原生RPC带来的问题。而且REST相比RPC更为灵活，服务提供和调用方的依赖只依靠一纸契约，不存在代码级别的强依赖，这在强调快速演化的微服务环境下，显得更加合适。</p>
+<p><strong>解决的问题域不一样</strong>：Dubbo的定位是一款RPC框架，Spring Cloud的目标是微服务架构下的一站式解决方案。</p>
+<p>Spring Cloud是一个由众多独立子项目组成的大型综合项目，每个子项目有不同的发行节奏，都维护着自己的发布版本号。Spring Cloud通过一个资源清单BOM（Bill of Materials）来管理每个版本的子项目清单。为避免与子项目的发布号混淆，所以没有采用版本号的方式，而是通过命名的方式。这些版本名称的命名方式采用伦敦地铁站的名称，同时根据字母表的顺序来对应版本时间顺序。</p>
+<p>链接：</p>
+<ul>
+<li><a href="https://springcloud.cc/spring-cloud-netfilx.html" target="_blank" rel="noopener">https://springcloud.cc/spring-cloud-netfilx.html</a></li>
+<li>中文API文档：<a href="https://springcloud.cc/spring-cloud-dalston.html" target="_blank" rel="noopener">https://springcloud.cc/spring-cloud-dalston.html</a></li>
+<li>SpringCloud中国社区：<a href="http://springcloud.cn/" target="_blank" rel="noopener">http://springcloud.cn/</a></li>
+<li>SpringCloud中文网：<a href="https://springcloud.cc" target="_blank" rel="noopener">https://springcloud.cc</a></li>
+</ul>
+<h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><h2 id="SpringCloud版本选择"><a href="#SpringCloud版本选择" class="headerlink" title="SpringCloud版本选择"></a>SpringCloud版本选择</h2><table>
+<thead>
+<tr>
+<th align="center">Spring Boot</th>
+<th align="center">Spring Cloud</th>
+<th align="center">关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1.2.x</td>
+<td align="center">Angel版本（天使）</td>
+<td align="center">兼容Spring Boot 1.2.x</td>
+</tr>
+<tr>
+<td align="center">1.3.x</td>
+<td align="center">Brixton版本（布里克斯顿）</td>
+<td align="center">兼容Spring Boot 1.3.x，也兼容Spring Boot 1.4.x</td>
+</tr>
+<tr>
+<td align="center">1.4.x</td>
+<td align="center">Camden版本（卡姆登）</td>
+<td align="center">兼容Spring Boot 1.4.x，也兼容Spring Boot 1.5.x</td>
+</tr>
+<tr>
+<td align="center">1.5.x</td>
+<td align="center">Dalston版本（多尔斯顿）</td>
+<td align="center">兼容Spring Boot 1.5.x，不兼容Spring Boot 2.0.x</td>
+</tr>
+<tr>
+<td align="center">1.5.x</td>
+<td align="center">Edgware版本（埃奇韦尔）</td>
+<td align="center">兼容Spring Boot 1.5.x，不兼容Spring Boot 2.0.x</td>
+</tr>
+<tr>
+<td align="center">2.0.x</td>
+<td align="center">Finchley版本（芬奇利）</td>
+<td align="center">兼容Spring Boot 2.0.x，不兼容Spring Boot 1.5.x</td>
+</tr>
+<tr>
+<td align="center">2.1.x</td>
+<td align="center">Greenwich版本（格林威治）</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h1 id="Eureka服务注册与发现"><a href="#Eureka服务注册与发现" class="headerlink" title="Eureka服务注册与发现"></a>Eureka服务注册与发现</h1><blockquote>
+<p>什么是服务治理</p>
+</blockquote>
+<p>Spring Cloud封装了Netflix公司开发的Eureka模块来实现服务治理。</p>
+<p>在传统的rpc远程调用框架中，管理每个服务与服务之间依赖关系比较复杂，管理比较复杂，所以需要使用服务治理，管理服务与服务之间依赖关系，可以实现服务调用、负载均衡、容错等，实现服务注册与发现。</p>
+<blockquote>
+<p>什么是服务注册与发现</p>
+</blockquote>
+<p>在服务注册与发现中，有一个注册中心。当服务器启动时，会把当前自己服务器的信息（比如，服务地址、通讯地址等）以别名方式注册到注册中心上。另一方（消费者|服务提供者），以该别名的方式去注册中心上获取到实际的服务通讯地址，然后在实现本地RPC调用RPC远程调用框架核心设计思想：在于注册中心，因为使用注册中心管理每个服务与服务之间的一个依赖关系（服务治理概念）。在任何rpc远程框架中，都会有一个注册中心（存放服务地址相关信息（接口地址）。</p>
+<h2 id="什么是Eureka"><a href="#什么是Eureka" class="headerlink" title="什么是Eureka"></a>什么是Eureka</h2><p>Eureka是Netflix的一个子模块，也是核心模块之一。Eureka是一个基于REST的服务，用于定位服务，以实现云端中间层服务发现和故障转移，服务注册与发现对于微服务来说是非常重要的，有了服务发现与注册，只需要使用服务的标识符，就可以访问到服务，而不需要修改服务调用的配置文件了，功能类似于Dubbo的注册中西，比如Zookeeper。</p>
+<p>Netflix在设计Eureka时，遵循的是AP原则。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><blockquote>
+<p>Eureka的基本架构</p>
+</blockquote>
+<ul>
+<li><p>Spring Cloud封装了Netflix公司开发的Eureka模块来实现服务注册和发现（对比Zookeeper）</p>
+</li>
+<li><p>Eureka采用了C-S的架构设计，EurekaServer作为服务注册功能的服务器，它是服务注册中心</p>
+</li>
+<li><p>而系统中的其它微服务。使用Eureka的客户端连接到EurekaServer并维持心跳连接。这样系统的维护人员就可以通过EurekaServer来监控系统中各个微服务是否正常运行，SpringCloud的一些其它模块（比如Zuul）就可以通过EurekaServer来发现系统中的其它微服务，并执行相关的逻辑。</p>
+</li>
+<li><p>和Dubbo架构对比</p>
+<p><img src="/archives/580061a7/Eureka%E4%B8%8EDubbo.jpg" alt="Eureka与Duboo"></p>
+<ul>
+<li>Eureka包含两个组件：Eureka Server和Eureka Client</li>
+<li>Eureka Server提供服务注册服务，各个节点启动后，会在EurekaServer中进行注册，这样Eureka Server中的服务注册表中将会存储所有可用服务节点的信息，服务节点的信息可以在界面中直观的看到。</li>
+<li>Eureka Client是一个Java客户端，用于简化EurekaServer的交互，客户端同时也具备一个内置的，使用轮询负载算法的负载均衡器。在应用启动后，将会向EurekaServer发送心跳（默认周期为30秒）。如果EurekaServer在多个心跳周期内没有接收到某个节点的心跳，EurekaServer将会从服务注册表中把这个服务节点移除掉（默认周期为90秒）</li>
+</ul>
+</li>
+<li><p>三大角色</p>
+<ul>
+<li>Eureka Server：提供服务的注册与发现</li>
+<li>Service Provider：将自身服务注册到Eureka中，从而使消费方能够找到</li>
+<li>Service Consumer：服务消费方从Eureka中获取注册服务列表，从而找到消费服务</li>
+</ul>
+</li>
+</ul>
+<h2 id="自我保护机制"><a href="#自我保护机制" class="headerlink" title="自我保护机制"></a>自我保护机制</h2><p>某个时刻某一个微服务不可以使用了，eureka不会立刻清理，依旧会对该微服务的信息进行保存。</p>
+<ul>
+<li>默认情况下，如果EurekaServer在一定时间内没有接收到某个微服务实例的心跳，EurekaServer将会注销该实例（默认90秒）。但是当网络分区故障发生时，微服务与Eureka之间无法正常通信，以上行为可能变得非常危险。因为微服务本身其实是健康的，此时本不应该注销这个服务。Eureka通过自我保护机制来解决这个问题。当EurekaServer节点在短时间内丢失过多客户端时（可能发生了网络分区故障），那么这个节点就会进入自我保护模式。一旦进入该模式，EurekaServer就会保护服务注册表中心的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。当网络故障恢复后，该EurekaServer节点会自动退出自我保护模式。</li>
+<li>在自我保护模式中，EurekaServer会保护服务注册表终中的信息，不再注销任何服务实例。当它收到心跳数重新恢复到阈值以上时，该EurekaServer节点就会自动退出自我保护模式。它的设计理念就是宁可保留错误的服务注册信息，也不盲目注销任何可能健康的服务实例。</li>
+<li>综上，自我保护模式是一种应对网络异常的安全保护措施。它的架构哲学是宁可同时保留所有微服务（健康的服务和不健康的微服务都会保留），也不盲目注销任何健康的微服务。使用自我保护模式，可以让Eureka集群更加的健壮和稳定。</li>
+<li>在SpringCloud中，可以使用<code>eureka.server.enable-self-presevation = false</code>禁用自我保护模式（不推荐关闭自我保护机制）。</li>
+</ul>
+<p>如果在Eureka Server的首页看到以下这段提示，则说明Eureka进入了保护模式：</p>
+<p><font color="red">EMERGENCY! EUREKA MAY BE INCORRECTLY CLAIMING INSTANCES ARE UP WHEN THEY’RE NOT.<br>RENEWALS ARE LESSER THAN THRESHOLD AND HENCE THE INSTANCES ARE NOT BEING EXPIRED JUST TO BE SAFE</font></p>
+<h2 id="对比Zookeeper"><a href="#对比Zookeeper" class="headerlink" title="对比Zookeeper"></a>对比Zookeeper</h2><p>RDBMS（Mysql、Oracle、SQLServer）=&gt; ACID</p>
+<p>NoSQL（redis、mongdb） =&gt; CAP</p>
+<p><strong>ACID是什么</strong>？</p>
+<ul>
+<li>A（Atomicity）原子性</li>
+<li>C（Consistency）一致性</li>
+<li>I（Isolation）隔离性</li>
+<li>D（Durability）持久性</li>
+</ul>
+<p><strong>CAP是什么</strong>？</p>
+<ul>
+<li>C（Consistency）强一致性</li>
+<li>A（Availability）可用性</li>
+<li>P（Partition tolerance）分区容错性</li>
+</ul>
+<p>CAP的三进二：CA、AP、CP</p>
+<p><strong>CAP理论核心</strong></p>
+<ul>
+<li>一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求</li>
+<li>根据CAP原理，将NoSql数据库分成了满足CA原则，满足CP原则和满足AP原则三大类：<ul>
+<li>CA：单点集群，满足一致性、可用性的系统，通常可扩展性较差</li>
+<li>CP：满足一致性、分区容错性的系统，通常性能不是特别高</li>
+<li>AP：满足可用性、分区容错性的系统，通常可能对一致性要求低一些</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>作为服务注册中心，Eureka比Zookeeper好在哪里?</p>
+</blockquote>
+<p>著名的GAP理论指出，一个分布式系统不可能同时满足C（一致性）、A（可用性）、P（容错性）。</p>
+<p>由于分区容错性P在分布式系统中是必须要保证的，因此只能在A和C之间进行权衡。</p>
+<ul>
+<li>Zookeeper保证的是CP</li>
+<li>Eureka保证的是AP</li>
+</ul>
+<p><strong>Zookeeper保证的是CP</strong></p>
+<p>当向注册中心查询服务列表时，我们可以容忍注册中心返回的是几分钟以前的注册信息，但不能接受服务直接down掉不可用。也就是说，服务注册功能对可用性的要求要高于一致性。但是zookeeper会出现这样一种情况，当master节点因为网络故障与其它节点失去联系时，剩余节点会重新进行leader选举。问题在于，选举leader的时间过长，30-120s，且选举期间整个zookeeper集群是不可用的，这就导致在选举期间注册服务瘫痪。在云部署的环境下，因为网络问题使得zookeeper集群失去master节点是较大概率会发生的事件，虽然服务最终能够恢复，但是漫长的选举时间导致的注册长期不可用是不能容忍的。</p>
+<p><strong>Eureka保证的是AP</strong></p>
+<p>Eureka知道上述的这一点，因此在设计时就优先保证可用性。Eureka各个节点都是平等的，几个节点挂掉不会影响正常节点的工作，剩余的节点依然可以提供注册和查询服务。而Eureka的客户端在向某个Eureka注册时，如果发现连接失败，则会自动切换至其它节点，只要有一台Eureka还在，就能保证注册服务的可用性，只不过查到的信息可能不是最新的，除此之外，Eureka还有一种自我保护机制，如果在15分钟内超过85%的节点都没有正常的心跳，那么Eureka就认为客户端与注册中心出现了网络故障，此时会出现以下几种情况：</p>
+<ul>
+<li>Eureka不再从注册列表中移除因为长时间没收到心跳而应该过期的服务</li>
+<li>Eureka仍然能够接受新服务的注册和查询请求，但是不会被同步到其它节点上（即保证当前节点依然可用）</li>
+<li>当网络稳定时，当前实例新的注册信息会被同步到其它节点中</li>
+</ul>
+<p><strong>因此，Eureka可以很好的应对网络故障导致部分节点失去联系的情况，而不会像zookeeper那样使整个注册服务瘫痪</strong>。</p>
+<h1 id="Ribbon负载均衡"><a href="#Ribbon负载均衡" class="headerlink" title="Ribbon负载均衡"></a>Ribbon负载均衡</h1><h2 id="ribbon是什么"><a href="#ribbon是什么" class="headerlink" title="ribbon是什么"></a>ribbon是什么</h2><p>Spring Cloud Ribbon是基于Netflix Ribbon实现的一套<strong>客户端负载均衡</strong>的工具。</p>
+<p>简单来说，Ribbon是Netflix发布的开源项目，主要功能是提供客户端的软件负载均衡算法，将Netflix的中间层服务连接在一起。Ribbon的客户端组件提供一系列完整的配置项，如连接超时，重试等等。简单的说，就是在配置文件中列出LoadBalancer（简称LB：负载均衡）后面所有的机器，Ribbon会自动的帮助你基于某种规则（如简单轮询，随机连接等等）去连接这些机器。</p>
+<h2 id="ribbon能干嘛"><a href="#ribbon能干嘛" class="headerlink" title="ribbon能干嘛"></a>ribbon能干嘛</h2><p>LB，即负载均衡（Load Balance），在微服务或分布式集群中经常用的一种应用。</p>
+<p>负载均衡，简单来说就是将用户的请求平摊的分配到多个服务上，从而达到系统的HA（高可用）。</p>
+<p>常见的负载均衡软件有Nginx，Lvs等等。</p>
+<p>dubbo、SpringCloud中均提供了负载均衡，<strong>SpringCloud的负载均衡算法可以自定义</strong>。</p>
+<p><strong>负载均衡的简单分类</strong>：</p>
+<ul>
+<li>集中式LB，即在服务的消费方和提供方之间使用独立的LB设施，如Nginx，由该设施负责把访问请求通过某种策略转发至服务的提供方。</li>
+<li>进程式LB<ul>
+<li>将LB逻辑集成到消费方，消费方从服务注册中心获知有哪些地址可用，然后自己在从这些地址中选出一个合适的服务器</li>
+<li>Ribbon就属于进程式LB，它只是一个类库，集成于消费方进程，消费方通过它来获取到服务提供方的地址。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Feign负载均衡"><a href="#Feign负载均衡" class="headerlink" title="Feign负载均衡"></a>Feign负载均衡</h1><p>feign是声明式的web service客户端，它让微服务之间的调用变得更简单了，类似controller调用service。SpringCloud集成了Ribbon和Eureka，可在使用Feign时提供负载均衡的http客户端。</p>
+<p>只需要创建一个接口，然后添加注解即可。</p>
+<p>调用微服务访问两种方法：</p>
+<ul>
+<li>微服务名字（ribbon）</li>
+<li>接口和注解（feign）</li>
+</ul>
+<p><strong>Feign能干什么</strong>？</p>
+<p>Feign旨在使编写Java Http客户端变得更容易</p>
+<p>在使用Ribbon+RestTemplate时，利用RestTemplate对Http请求的封装处理，形成了一套模板化的调用方法。但是在实际开发中，由于对服务依赖的调用可能不止一处，往往一个接口会被多处调用，所以通常都会针对每个微服务自行封装一些客户端类来包装这些依赖服务的调用。所以，Feign在此基础上做了进一步封装，由它来帮助我们定义和实现依赖服务接口的定义，在Feign的实现下，只需要创建一个接口并使用注解的方式来配置它（类似于Dao接口上标注 Mapper注解，现在是一个微服务接口上面标注一个Feign注解即可。）即可完成对服务提供方的接口绑定，简化了使用SpringCloud Ribbon时，自动封装服务调用客户端的开发量。</p>
+<p><strong>Feign默认集成了Ribbon</strong></p>
+<p>利用Ribbon维护了MicroServiceCloud-Dept的服务列表信息，并且通过轮询实现了客户端的负载均衡，而与Ribbon不同的是，通过Feign只需要定义服务绑定接口且以声明式的方法，优雅而且简单的实现了服务调用。</p>
+<h2 id="Feign使用步骤"><a href="#Feign使用步骤" class="headerlink" title="Feign使用步骤"></a>Feign使用步骤</h2><blockquote>
+<p><strong>应怎样选择使用Feign，还是使用Ribbon</strong>？</p>
+<p>如果喜欢REST风格就使用Ribbon，如果喜欢社区版的面向接口风格就使用Feign。</p>
+<p>Feign本质上也是实现了Ribbon，只不过后者是在调用方式上，为了满足一些开发者接口调用的习惯。</p>
+</blockquote>
+<h1 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h1><blockquote>
+<p><strong>分布式系统面临的问题</strong></p>
+<p>复杂分布式体系结构中的应用程序有数十个依赖关系，每个依赖关系在某些时候将不可避免的失败。</p>
+</blockquote>
+<h2 id="服务雪崩"><a href="#服务雪崩" class="headerlink" title="服务雪崩"></a>服务雪崩</h2><p>多个微服务之间调用时，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其它的微服务，这就是所谓的“扇出”，如果扇出的链路上某个微服务的调用响应时间过长或者不可用，对微服务A的调用就会占用越来越多的系统资源，进而引起系统的崩溃，所谓的“雪崩效应”。</p>
+<h2 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h2><p>Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在分布式系统里，许多依赖不可避免的会调用失败，比如超时，异常等，Hystrix能够保证在一个依赖出问题的情况下，不会导致整体服务失败，避免级联故障，以提高分布式系统的弹性。</p>
+<p>“断路器”本身是一个开关装置，当某个服务单元发生故障之后，通过断路器的故障监控（类似熔断保险丝），向调用方返回一个服务预期的、可处理的备选响应（FallBack），而不是长时间的等待或者抛出调用方无法处理的异常，这样就可以保证了服务调用方的线程不会被长时间不必要的占用，从而避免了故障在分布式系统中的蔓延，乃至雪崩。</p>
+<p><strong>能干什么</strong>？</p>
+<ul>
+<li>服务降级</li>
+<li>服务熔断</li>
+<li>服务限流</li>
+<li>接近实时的监控</li>
+<li>……</li>
+</ul>
+<p>官网：<a href="https://github.com/Netflix/Hystrix/wiki" target="_blank" rel="noopener">https://github.com/Netflix/Hystrix/wiki</a></p>
+<p>当一切正常时，请求流如下所示：</p>
+<p><img src="/archives/580061a7/aHR0cHM6Ly9naXRodWIuY29tL05ldGZsaXgvSHlzdHJpeC93aWtpL2ltYWdlcy9zb2EtMS02NDAucG5n" alt=""></p>
+<p>当许多后端系统中有一个潜在阻塞服务时，它可以阻止整个用户请求：</p>
+<p><img src="/archives/580061a7/aHR0cHM6Ly9naXRodWIuY29tL05ldGZsaXgvSHlzdHJpeC93aWtpL2ltYWdlcy9zb2EtMi02NDAucG5n" alt=""></p>
+<p>对于高流量的应用来说，单一的后端依赖可能会导致所有服务器上的所有资源都在几秒中内饱和。比失败更糟糕的是，这些应用程序还可能导致服务之间的延迟增加，备份队列，线程和其它系统资源紧张，导致整个系统发生更多级联故障，这些都表示需要对故障和延迟进行隔离和管理，以便单个依赖关系的失败，不能取消整个应用程序或系统。</p>
+<p><img src="/archives/580061a7/aHR0cHM6Ly9naXRodWIuY29tL05ldGZsaXgvSHlzdHJpeC93aWtpL2ltYWdlcy9zb2EtMy02NDAucG5n" alt=""></p>
+<p>当使用Hystrix包装每个基础依赖时，上图中的体系结构会发生类似于下图的变化。每个依赖项时相互隔离的，限制在延迟发生时它可以填充的资源中，并包含在回退逻辑中，该逻辑决定在依赖项中发生任何类型的故障时要做出什么样的响应：</p>
+<p><img src="/archives/580061a7/20200521131820586.png" alt=""></p>
+<p>熔断机制是对应雪崩效应的一种微服务链路保护机制。</p>
+<p>当扇出链路的某个微服务不可用或者响应时间太长时，会进行服务的降级，进而熔断该节点微服务的调用，快速返回错误的响应信息。当检测到该节点微服务调用响应正常后恢复调用链路。在SpringCloud框架里熔断机制通过Hystrix实现。Hystrix会监控微服务间调用的状况，当失败的调用到一定阈值，缺省是5秒内20次调用失败就会启动熔断机制。熔断机制的注解是<code>@HystrixCommand</code>。</p>
+<p>服务熔断解决以下问题：</p>
+<ul>
+<li>当所依赖的对象不稳定时，能够起到快速失败的目的；</li>
+<li>快速失败后，能够根据一定的算法动态试探所依赖对象是否恢复。</li>
+</ul>
+<p>为了避免因某个微服务后台出现异常或错误而导致整个应用或网页报错，使用熔断是必要的。</p>
+<h1 id="服务降级"><a href="#服务降级" class="headerlink" title="服务降级"></a>服务降级</h1><p>服务降级是指当服务器压力剧增的情况下，根据实际业务情况及流量，对一些服务和页面有策略的不处理，或换种简单的方式处理，从而释放服务器资源以保证核心业务正常运作或高效运作。换句话讲，就是尽可能的把系统资源让给优先级高的服务。</p>
+<p>资源有限，而请求是无限的。如果在并发高峰期，不做服务降级处理，一方面肯定会影响整体服务的性能，严重的话可能会导致宕机某些重要的服务不可用。所以，一般在高峰期，为了保证核心功能服务的可用性，都要对某些服务降级处理。</p>
+<blockquote>
+<p>服务降级主要用于什么场景？</p>
+</blockquote>
+<p>当整个微服务架构整体的负载超出了预设的上限阈值或即将到来的流量预计会超过预设的阈值时，为了保证重要或基本的服务能正常运行，可以将一些不重要或不紧急的服务或任务进行服务的延迟使用或暂停使用。</p>
+<p>降级的方式可以根据业务来，可以延迟服务，比如延迟给用户增加积分，只是放到一个缓存中，等服务平稳之后再执行；或者在粒度范围内关闭服务，比如关闭相关文章的推荐。</p>
+<p>当某一时间内服务A的访问量增加，而B和C的访问量较少，为了缓解A服务的压力，这时需要B和C暂时关闭一些服务功能，去承担A的部分服务，从而为A分担压力，叫做服务降级。</p>
+<blockquote>
+<p>服务降级需要考虑的问题</p>
+</blockquote>
+<ul>
+<li>哪些服务是核心服务，哪些服务是非核心服务。</li>
+<li>哪些服务可以支持降级，哪些服务不能支持降级，降级策略是什么。</li>
+<li>除服务降级之外是否存在更复杂的业务放通场景，策略是什么。</li>
+</ul>
+<blockquote>
+<p>自动降级分类</p>
+</blockquote>
+<ul>
+<li>超时降级：主要配置好超时时间和超时重试次数和机制，并使用异步机制探测恢复情况。</li>
+<li>失败次数降级：主要是一些不稳定的api，当失败调用次数达到一定阈值自动降级，同样要使用异步机制探测恢复情况。</li>
+<li>故障降级：比如要调用的远程服务挂掉了（网络故障、DNS故障、http服务返回错误的状态码、RPC服务抛出异常），则可以直接降级。降级后的处理方案有：默认值（比如库存服务挂了，返回默认现货）、兜底数据（比如广告挂了，返回提前准备好的一些静态页面）、缓存（之前暂存的一些缓存数据）。</li>
+<li>限流降级：秒杀或者抢购一些限购商品时，此时可能会因为访问量太大而导致系统崩溃，此时会使用限流来进行限制访问量，当达到限流阈值，后续请求会被降级；降级后的处理方案可以是排队页面（将用户导流到排队页面等一会重试）、无货（直接告知用户没货了）、错误页（如活动太火爆了，稍后重试）。</li>
+</ul>
+<blockquote>
+<p>服务熔断和降级的区别</p>
+</blockquote>
+<p>服务熔断（服务端）：某个服务超时或异常，引起熔断，类似于保险丝（自我熔断）。</p>
+<p>服务降级（客户端）：从整体网站请求负载考虑，当某个服务熔断或者关闭之后，服务将不再被调用，此时在客户端，可以准备一个FallBackFactory，返回一个默认的值（缺省值），会导致整体的服务下降，但是好歹能用，比直接挂掉强。</p>
+<ul>
+<li>触发原因不太一样，服务熔断一般是某个服务（下游服务）故障引起，而服务降级一般是从整体负荷考虑。</li>
+<li>管理目标的层次不太一样，熔断其实是一个框架级的处理，每个微服务都需要（无层次之分），而降级一般需要对业务有层级之分（比如降级一般是从最外围服务开始）。</li>
+<li>实现方式不太一样，服务降级具有代码侵入性（由控制器完成或自动降级），熔断一般称为自我熔断。</li>
+</ul>
+<blockquote>
+<p>熔断，降级，限流：</p>
+</blockquote>
+<p>限流：限制并发的请求访问量，超过阈值则拒绝。</p>
+<p>降级：服务分优先级，牺牲非核心服务（不可用），保证核心服务稳定，从整体负荷考虑。</p>
+<p>熔断：依赖的下游服务故障触发熔断，避免引发本系统崩溃，系统自动执行和恢复。</p>
+<h1 id="Zuul路由网关"><a href="#Zuul路由网关" class="headerlink" title="Zuul路由网关"></a>Zuul路由网关</h1><p>Zuul包含了对请求的路由和过滤两个主要功能，其中路由功能负责将外部请求转发到具体的微服务实例上，是实现外部访问统一入口的基础，而过滤器功能则负责对请求的处理过程进行干预，是实现请求校验，服务聚合等功能的基础。Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用，同时从Eureka中获得其它微服务的消息，以及以后的访问微服务都是通过Zuul跳转后获得。</p>
+<p><strong>Zuul服务最终还是会注册进Eureka</strong>。</p>
+<p>提供代理、路由、过滤三大功能。</p>
+<p>官网文档：<a href="https://github.com/Netflix/zuul" target="_blank" rel="noopener">https://github.com/Netflix/zuul</a></p>
+<h1 id="config分布式配置"><a href="#config分布式配置" class="headerlink" title="config分布式配置"></a>config分布式配置</h1><blockquote>
+<p>分布式系统面临配置文件的问题</p>
+</blockquote>
+<p>微服务意味着要将单体应用中的业务拆分成一个个子服务，每个服务的粒度相对较小，因此系统中会出现大量的服务，由于每个服务都需要必要的配置信息才能运行，所以一套集中式的，动态的配置管理设施是必不可少的。SpringCloud提供了ConfigServer来解决这个问题，每一个微服务自己带着一个application.yml，那成百上千的配置文件修改的话，很是繁琐。</p>
+<blockquote>
+<p>SpringCloud config分布式配置中心</p>
+</blockquote>
+<p>SpringCloud Config为微服务架构中的微服务提供集中化的外部配置支持，配置服务器为各个不同微服务应用的所有环节提供了一个中心化的外部配置。</p>
+<p><img src="/archives/580061a7/image-20211121222258740.png" alt=""></p>
+<p>Spring Cloud Config分为<strong>服务端</strong>和<strong>客户端</strong>。</p>
+<ul>
+<li>服务端也称为分布式配置中心，它是一个独立的微服务应用，用来连接配置服务器并为客户端提供获取配置信息，加密，加密信息等访问接口。</li>
+<li>客户端则是通过指定的配置中心来管理应用资源，以及与业务相关的配置内容，并在启动时从配置中心获取和加载配置信息。配置服务器默认采用git来存储配置信息，这样有助于对环境配置进行版本管理。并且可以通过git客户端工具来方便的管理和访问配置内容。</li>
+</ul>
+<blockquote>
+<p>SpringCloud config分布式配置中心能干嘛</p>
+</blockquote>
+<ul>
+<li>集中管理配置文件</li>
+<li>不同环境，不同配置，动态化的配置更新，分环境部署</li>
+<li>运行期间动态调整配置，不再需要在每个服务部署的机器上编写配置文件，服务会向配置中心统一拉取配置自己的信息</li>
+<li>当配置发生变化时，服务不需要重启，即可感知到配置的变化，并应用新的配置</li>
+<li>将配置信息以REST接口的形式暴露</li>
+</ul>
+<blockquote>
+<p>SpringCloud config分布式配置中心与GitHub整合</p>
+</blockquote>
+<p>由于SpringCloud Config默认使用Git来存储配置文件（也存在其它方式，比如支持SVN和本地文件），但是推荐使用Git，而且使用的是http/https访问的形式。</p>
+<h1 id="常见面试题"><a href="#常见面试题" class="headerlink" title="常见面试题"></a>常见面试题</h1><p>什么是微服务？</p>
+<p>微服务之间是如何独立通信的？</p>
+<p>SpringCloud和Dubbo有哪些区别？</p>
+<p>SpringBoot和SpringCloud，请谈谈你对它们的了解？</p>
+<p>什么是服务熔断？什么是服务降级？</p>
+<p>微服务有哪些优缺点？说一下你在项目开发中遇到的坑。</p>
+<p>你所知道的微服务技术栈有哪些？请列举一二。</p>
+<p>Eureka和Zookeeper都可以提供服务注册和发现的功能，请谈谈两者的区别？</p>
+
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/SpringCloud/">
+                                    <span class="chip bg-color">SpringCloud</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    /* #vcomments .vwrap {
+        box-sizing: border-box;
+        padding: 0 0 44px;
+        background-color: #F0FFF0;
+    }
+    #vcomments .vwrap .vheader{width: 80%;bottom:0;position: absolute;background: #F0FFF0;}
+
+    #vcomments .vinput{padding:10px 15px; text-align: center;}
+
+    #vcomments .vwrap .vheader .vinput{border-bottom:0px}
+
+    #vcomments .vwrap .vedit .vctrl{margin-top:-44px;right:0;position:absolute;margin-right:-3px;}
+
+    #vcomments  .vwrap .vrow{position:absolute;right:0;bottom:0;width:20%;padding-top:0px;}
+
+    #vcomments  .vrow {font-size: 0;padding: 0px 0;}
+
+    #vcomments  .vicon {margin-right: 15px;}
+
+    #vcomments  .vrow .vcol.vcol-30{display: none}
+
+    #vcomments  .vedit .vctrl span.vpreview-btn{display: none}
+
+    #vcomments  .vrow .vcol.vcol-70{width: 100%;}
+
+    #vcomments  .vsubmit.vbtn{border-radius: 0;padding: 0;color: #fff;line-height: 44px;width:100%;border: none;background:#00ecbc;}
+
+    #vcomments  .vcards .vcard .vh .vhead .vsys{background: #F0FFF0;}
+
+    #vcomments  .vcards .vcard .vh .vmeta .vat{font-size: 12px;display: block;margin-left: 15px;float: right;color: #fff;background-color: #00ecbc;line-height: 20px;padding: 0 6px;border-radius: 3px;}
+
+    @media screen and (max-width: 520px){
+    #vcomments  .vwrap .vheader .vinput{width: 33.33%;padding:10px 5px;}  
+    } */
+
+    #vcomments input[type=text],
+
+    #vcomments input[type=email],
+
+    #vcomments input[type=url],
+
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+    #vcomments .vwrap p {
+        height: 20px;
+        width: 20px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    /* 修复评论第一行位置错位 */
+    .v .vlist .vcard {
+    padding-top: 2.5em !important ;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        admin_email: '2292807998@qq.com',
+        appId: 'vDtNtruYzjCbFJbWyeQ8Bybw-gzGzoHsz',
+        appKey: 'TJv4iKCEAYMHDhy8V8IvAJGF',
+        path: window.location.pathname,
+        comment_count: true,
+        notify: 'false' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'retro',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'ヾﾉ≧∀≦)o在这里可以留言评论喔！',
+
+    });
+    $(document).ready(function(){
+        $("#vcomments").on('click', 'span.vat',function(){
+            $(this).parent('div.vmeta').next("div.vcontent").after($("div.vwrap"));
+            $('textarea#veditor').focus();
+        })
+    })
+</script>
+<!-- <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+    jinrishici.load(function(result) {
+        var jrsc_plac =  result.data.content + "\n「" + result.data.origin.title + "」" + result.data.origin.dynasty + " · " + result.data.origin.author
+        document.getElementById("veditor").setAttribute("placeholder",jrsc_plac);
+    });
+</script> -->
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/archives/4b0e1d36/">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/lskjwp/image/imageCover/Oracle%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.jpg" class="responsive-img" alt="Oracle数据库学习笔记">
+                        
+                        <span class="card-title">Oracle数据库学习笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            学习视频链接：B站 动力节点
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Oracle/" class="post-category">
+                                    Oracle
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Oracle/">
+                        <span class="chip bg-color">Oracle</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/archives/a91eaa72/">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/lskjwp/image@master/imageCover/Git学习笔记.png" class="responsive-img" alt="Git学习笔记">
+                        
+                        <span class="card-title">Git学习笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            学习视频链接：B站  遇见狂神说
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Git/" class="post-category">
+                                    Git
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Git/">
+                        <span class="chip bg-color">Git</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" >
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down" >
+        <a class="btn-floating btn-large waves-effect waves-light" title="展开/关闭TOC">
+            <i class="fas fa-list-ul" style="zoom: 0.88;"></i>
+        </a>
+    </div>
+<!-- <div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div> -->
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="6668004913"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">勇也很努力</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">317.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv" style="display: none;">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv" style="display:none">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "7";
+                    var startDate = "1";
+                    var startHour = "14";
+                    var startMinute = "24";
+                    var startSecond = "48";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2292807998@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2292807998" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2292807998" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<script>
+    /*
+    修改不蒜子初始化计数
+    */
+    $(document).ready(function () {
+
+        var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+        var pvcountOffset = 3000;  // 初始化首次数据
+        var uvcountOffset = 1100;
+
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int); // 停止检测
+            }
+        }
+    });
+</script>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" title="返回顶部">
+        <i class="fas fa-arrow-up" style="zoom: 0.88;"></i>
+    </a>
+</div>
+
+    <!-- <script src="/js/fireworks.js"></script> -->
+    <!-- <script src="/js/cursor.js"></script> -->
+    <!-- <script src="/js/click_show_text.js"></script> -->
+    <!-- <script src="/js/snow.js"></script> -->
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "f9383031"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <script type="text/javascript">
+        var OriginTitile=document.title,st;
+        document.addEventListener("visibilitychange",function(){
+            document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+        })
+    </script>
+
+    <!--夜晚模式-->
+    <script>
+        if (localStorage.getItem('dark') === '1') {
+        document.body.classList.add('dark');
+        }
+        else if (new Date().getHours() >= 22 || new Date().getHours() < 7) {
+        document.body.classList.add('dark');
+        } 
+        else if (matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+        }
+    </script>
+
+    <!--全屏-->
+    <script src="/js/fullscreen.js" type="module"></script>
+    <a onclick="switchNightMode()" id="sma">
+        <i class="fa fa-moon-o" id="nightMode" aria-hidden="true"></i>
+    </a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>

@@ -1,0 +1,2386 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="code-p6MPyNrcYn">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux常用命令的简单使用, HTML,CSS,JavaScript,JQuery,Java,Vue,学习笔记,生活随笔">
+    <meta name="description" content="关闭一扇窗，另一扇等着你打开！往事如烟，浅笑而安。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux常用命令的简单使用 | lskj</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+<style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+    
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+    
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+    
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+    
+   
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="lskj" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+    
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+    
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+    
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+    
+   
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+
+
+ <div id="loading-container">
+     <p class="loading-text">玩命加载中 . . . </p> 
+     <div class="loading-image">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div> 
+         <div></div>
+     </div>
+ </div><body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--动态背景-->
+    <!-- <div id="bg"><canvas></canvas><canvas></canvas><canvas></canvas></div>
+    <script src="/js/canva_moving_effect.js"></script> -->
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lskj</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/galleries" class="waves-effect waves-light">
+      
+      <i class="fas fa-image" style="zoom: 0.6;"></i>
+      
+      <span>相册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/navigate" class="waves-effect waves-light">
+      
+      <i class="fas fa-location-arrow" style="zoom: 0.6;"></i>
+      
+      <span>导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <!--全屏-->
+  <li id="fullscreen_li" class="fullscreen"><a href="javascript:void(0);" class="modal-trigger waves-effect waves-light"><i id="fullscreen" class="fas fa-expand-arrows-alt" title="全屏" style="zoom: 0.65;"></i></a></li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lskj</div>
+        <div class="logo-desc">
+            
+            关闭一扇窗，另一扇等着你打开！往事如烟，浅笑而安。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/galleries" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-image"></i>
+			
+			相册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/navigate" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-location-arrow"></i>
+			
+			导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<!-- <div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lskjwp/image@master/imageCover/Linux一.jpg')"> -->
+    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux常用命令的简单使用</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+        background-color: rgb(255, 255, 255,0.7);
+        border-radius: 10px;
+        box-shadow: 0 10px 35px 2px rgba(0, 0, 0, .15), 0 5px 15px rgba(0, 0, 0, .07), 0 2px 5px -5px rgba(0, 0, 0, .1) !important;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        background: linear-gradient(to bottom right,#61B5F3 0%, #26D6D1 100%);
+        width: 35px;
+        height: 35px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 35px;
+        position: absolute;
+        right: 0px;
+        /* font-size: 1.4rem; */
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/Ubuntu/">
+                                <span class="chip bg-color">Ubuntu</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux/" class="post-category">
+                                Linux
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:
+                    2019-10-01
+                </div>
+                
+
+                
+
+                <!--添加作者信息--> 
+                <div class="info-break-policy"> 
+                     
+                        <i class="fa fa-pencil"></i> 作者: 勇也很努力
+                     
+                </div>
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:
+                    4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:
+                    14 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Linux常用命令的简单使用.</p>
+<a id="more"></a>
+<blockquote>
+<p>切记<br>在Linux中字母区分大小写，非root的管理员可以使用sudo命令执行root权限的命令！</p>
+</blockquote>
+<h1 id="一、创建用户"><a href="#一、创建用户" class="headerlink" title="一、创建用户"></a>一、创建用户</h1><h2 id="创建root超级用户"><a href="#创建root超级用户" class="headerlink" title="创建root超级用户"></a>创建root超级用户</h2><p>$是普通管员，#是系统管理员，root用户默认是没有密码的，因此也就无法使用（据说是为了安全）。<br>想用root的话，得给root用户设置一个密码。命令如下：</p>
+<pre><code>sudo passwd root</code></pre><p>输入正确的当前管理员的密码，就可设置root用户密码。</p>
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><pre><code>//创建用户（useradd也可，username为你创建的用户名，创建用户需在root用户下创建）
+adduser username
+//设置用户密码（输入两次密码，使用adduser不需要设置密码命令）
+passwd username</code></pre><h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><p>（userdel或者deluser皆可）</p>
+<pre><code>userdel -f username</code></pre><h1 id="二、文件操作命令"><a href="#二、文件操作命令" class="headerlink" title="二、文件操作命令"></a>二、文件操作命令</h1><h2 id="（1）文件处理命令"><a href="#（1）文件处理命令" class="headerlink" title="（1）文件处理命令"></a>（1）文件处理命令</h2><h3 id="1、ls"><a href="#1、ls" class="headerlink" title="1、ls"></a>1、ls</h3><pre><code>ls：(list)列出参数的属性信息
+命令格式：ls [选项] [参数]</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td align="center">以详细信息的形式展示出当前目录下的文件</td>
+</tr>
+<tr>
+<td>-a</td>
+<td align="center">显示当前目录下的全部文件（包括隐藏文件）</td>
+</tr>
+<tr>
+<td>-d</td>
+<td align="center">查看目录属性</td>
+</tr>
+<tr>
+<td>-t</td>
+<td align="center">按创建时间顺序列出文件</td>
+</tr>
+<tr>
+<td>-i</td>
+<td align="center">输出文件的inode编号</td>
+</tr>
+<tr>
+<td>-R</td>
+<td align="center">列出当前目录下的所有文件信息，并以递归方式显示各个子目录中的文件和子目录信息</td>
+</tr>
+<tr>
+<td>-h</td>
+<td align="center">配合-l使用，显示文件大小，例如ls -l -h或者ls -lh</td>
+</tr>
+</tbody></table>
+<h3 id="2、cd"><a href="#2、cd" class="headerlink" title="2、cd"></a>2、cd</h3><pre><code>cd：(change directory)切换目录
+命令格式：cd 参数</code></pre><table>
+<thead>
+<tr>
+<th>示例</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd</td>
+<td align="center">切换到当前用户的家目录</td>
+</tr>
+<tr>
+<td>cd ./Public</td>
+<td align="center">切换到当前目录为相对路径的Public目录中</td>
+</tr>
+<tr>
+<td>cd ..</td>
+<td align="center">切换工作路径到上一级目录</td>
+</tr>
+<tr>
+<td>cd /etc/yum</td>
+<td align="center">切换到绝对路径/etc/yum目录中(此命令使用得存在yum)</td>
+</tr>
+<tr>
+<td>cd ~</td>
+<td align="center">切换到当前用户的家目录</td>
+</tr>
+<tr>
+<td>cd -</td>
+<td align="center">可以在最近两次工作目录之间来回切换</td>
+</tr>
+</tbody></table>
+<h3 id="3、pwd"><a href="#3、pwd" class="headerlink" title="3、pwd"></a>3、pwd</h3><pre><code>pwd：(print working directory)显示当前工作目录的绝对路径
+命令格式：pwd</code></pre><h3 id="4、touch"><a href="#4、touch" class="headerlink" title="4、touch"></a>4、touch</h3><pre><code>touch：文件存在，便更新已存在的时间标签；若文件不存在，则新建文件
+命令格式：touch 参数
+示例：touch hello.c</code></pre><h3 id="5、mkdir"><a href="#5、mkdir" class="headerlink" title="5、mkdir"></a>5、mkdir</h3><pre><code>mkdir：(make diretory)创建目录
+命令格式：mkdir [选项] 参数</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-p</td>
+<td align="center">若路径中的目录不存在，则先创建目录(递归创建目录)</td>
+</tr>
+<tr>
+<td>-v</td>
+<td align="center">查看文件创建过程</td>
+</tr>
+</tbody></table>
+<pre><code>示例：mkdir -pv ./testmkdir/testmkdir/t</code></pre><pre class=" language-[]"><code class="language-[]">不能与当前目录中**已有的目录或文件**同名</code></pre>
+<h3 id="6、cp"><a href="#6、cp" class="headerlink" title="6、cp"></a>6、cp</h3><pre><code>cp：(copy)将一个或多个源文件复制到指定目录
+命令格式：cp [选项] 源文件或目录 目标目录</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-R</td>
+<td align="center">递归处理，将指定目录的文件及子目录一并处理</td>
+</tr>
+<tr>
+<td>-p</td>
+<td align="center">拷贝的同时不修改文件属性，包括所有者、所属组、权限和时间</td>
+</tr>
+<tr>
+<td>-f</td>
+<td align="center">强行复制文件或目录，无论目的文件或目录是否已经存在</td>
+</tr>
+<tr>
+<td>-i</td>
+<td align="center">覆盖文件前提示</td>
+</tr>
+</tbody></table>
+<h3 id="7、mv"><a href="#7、mv" class="headerlink" title="7、mv"></a>7、mv</h3><pre><code>mv：(move)移动文件或目录
+命令格式：mv 源文件或目录 目标目录
+示例：mv hello.c ./testmkdir</code></pre><h3 id="8、rm"><a href="#8、rm" class="headerlink" title="8、rm"></a>8、rm</h3><pre><code>rm：(remove)删除目录中的文件或目录
+命令格式：rm [选项] 文件或目录</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-r</td>
+<td align="center">递归地删除目录下的内容，<strong>删除文件夹</strong>时必须加此参数</td>
+</tr>
+<tr>
+<td>-f</td>
+<td align="center">强制删除文件或目录</td>
+</tr>
+<tr>
+<td>-rf</td>
+<td align="center">选项-r与-f结合，删除目录中所有文件和子目录，并且不一一确认</td>
+</tr>
+<tr>
+<td>-i</td>
+<td align="center">在删除文件或目录时对要删除的内容逐一进行确认</td>
+</tr>
+</tbody></table>
+<pre><code>使用**rm**命令要小心，因为文件删除后不能恢复</code></pre><h3 id="9、rmdir"><a href="#9、rmdir" class="headerlink" title="9、rmdir"></a>9、rmdir</h3><pre><code>rmdir：(remove directory)删除目录
+命令格式：rmdir [-p] 目录
+示例：rmdir dir</code></pre><h3 id="10、tree"><a href="#10、tree" class="headerlink" title="10、tree"></a>10、tree</h3><p>tree：以树状图列出文件目录结构<br>-d：只显示目录</p>
+<pre><code>使用时如果提示没有安装tree，根据提示安装tree包，安装命令如下：
+sudo apt-get install tree</code></pre><h2 id="（2）文件查看命令"><a href="#（2）文件查看命令" class="headerlink" title="（2）文件查看命令"></a>（2）文件查看命令</h2><h3 id="1、cat"><a href="#1、cat" class="headerlink" title="1、cat"></a>1、cat</h3><pre><code>cat：(concatenate and display files)打印文件内容到输出设备
+命令格式：cat 文件名
+示例：cat hello.c</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td align="center">对非空输出行编号</td>
+</tr>
+<tr>
+<td>-n</td>
+<td align="center">对输出的所有行编号</td>
+</tr>
+</tbody></table>
+<pre><code>cat命令可以用来**查看文件内容、创建文件、文件合并、追加文件内容**等功能
+cat会一次显示所有内容，适合**查看内容较少**的文本文件
+Linux中还有一个 nl 的命令和 cat -b 的效果等价</code></pre><h3 id="2、more"><a href="#2、more" class="headerlink" title="2、more"></a>2、more</h3><pre><code>more：分页显示文件内容，+n表示从第n行开始显示，-n表示分屏显示时每个屏幕n行
+命令格式：more 文件名</code></pre><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>f/Space</td>
+<td align="center">显示下一页</td>
+</tr>
+<tr>
+<td>Enter</td>
+<td align="center">显示下一行</td>
+</tr>
+<tr>
+<td>q/Q</td>
+<td align="center">退出</td>
+</tr>
+<tr>
+<td>b</td>
+<td align="center">回滚一屏</td>
+</tr>
+<tr>
+<td>f</td>
+<td align="center">前滚一屏</td>
+</tr>
+</tbody></table>
+<h3 id="3、head"><a href="#3、head" class="headerlink" title="3、head"></a>3、head</h3><pre><code>head：查看文件的前n行
+命令格式：head -n 文件名</code></pre><h3 id="4、tail"><a href="#4、tail" class="headerlink" title="4、tail"></a>4、tail</h3><pre><code>tail：查看文件的后n行
+命令格式：tail -n 文件名
+tail -f 读取日志文件并实时更新读取的内容</code></pre><h3 id="5、nl"><a href="#5、nl" class="headerlink" title="5、nl"></a>5、nl</h3><pre><code>nl：带行号显示文本文件</code></pre><h3 id="6、tac"><a href="#6、tac" class="headerlink" title="6、tac"></a>6、tac</h3><pre><code>tac：逆序显示文本文件</code></pre><h3 id="7、less"><a href="#7、less" class="headerlink" title="7、less"></a>7、less</h3><pre><code>less：回卷显示文本文件</code></pre><h3 id="8、diff"><a href="#8、diff" class="headerlink" title="8、diff"></a>8、diff</h3><pre><code>diff：逐行比较两个文本文件，列出其不同之处</code></pre><pre class=" language-[]"><code class="language-[]">使用以下两个命令时，若文件存在，则打开；反之，则创建空白的文件并打开它！
+在这里，就需要说一下文件类型了，
+在Windows中，文件类型有.txt,.c,.mp3,.mp4等，根据文件的后缀名就能判断文件类型。
+在Linux中，一个文件是否能被执行，和后缀名没有太大关系，主要与文件属性有关。
+但是建议对于像我这样初学Linux的菜鸟而言，最好还是加上后缀名。
+现在的Linux桌面环境和Windows一样智能化，文件的类型是和相应的程序关联的。
+在我们打开某个文件时，系统会自动判断用哪个应用程序打开。如果从这方面来说，Linux桌面环境和Windows桌面没有太大的区别。
+
+vi(vim)：编辑文件，似乎使用时需要安装vim包，若需要,根据提示安装
+命令格式：vi 文件名（vim 文件名）
+退出：
+//保存并退出
+按ESC,输入：:wq (或者:wq!)
+//强行退出，不保存
+按ESC，输入：:q!
+
+
+gedit：编辑文本文件
+命令格式：gedit 文本名
+</code></pre>
+<h2 id="（3）权限操作命令"><a href="#（3）权限操作命令" class="headerlink" title="（3）权限操作命令"></a>（3）权限操作命令</h2><p>需要详细了解以下命令用法，可前往<a href="https://yusi123.com/3097.html" target="_blank" rel="noopener">https://yusi123.com/3097.html</a></p>
+<h3 id="1、chmod"><a href="#1、chmod" class="headerlink" title="1、chmod"></a>1、chmod</h3><pre><code>chmod：修改文件和目录的权限。控制文件或目录的，读，写，执行权限。可以采用数字或字符的方式对文件或目录的权限进行变更。
+chmod  [nnn]  filename //修改文件或目录的权限
+chmod  -R  [nnn]  filename //递归修改目录和目录下的文件的权限。
+chmod  u=xxx,g=xxx,o=xxx  filename //修改文件或目录的权限。
+chmod   a+xxx  filename //给所有人对该文件或目录增加一个权限。</code></pre><pre class=" language-[]"><code class="language-[]">u：user，即文件或目录的所有者的权限。
+g：group，即文件或目录的所属组的权限。
+o：other，即其他用户的权限。
+a：all，即全部用户。
+r：read，读的权限。数字表示为4
+w：write，写的权限，数字表示为2
+x：执行权限，数字表示为1
++：为增加
+-：为取出
+=：为设置
+-R：递归，对目录本身和目录下面的所有文件进行操作。</code></pre>
+<h3 id="2、chown"><a href="#2、chown" class="headerlink" title="2、chown"></a>2、chown</h3><pre><code>chown：可以认为是 "change owner" 的缩写，主要用于修改文件（或目录）的所有者，除此之外，这个命令也可以修改文件（或目录）的所属组。其操作权限一般为管理员。
+chown [选项]... [所有者][:[组]] 文件...
+
+当只需要修改所有者时，可使用如下 chown 命令的基本格式：
+[root@localhost ~]# chown [-R] 所有者 文件或目录
+
+-R（注意大写）选项表示连同子目录中的所有文件，都更改所有者。
+
+如果需要同时更改所有者和所属组，chown 命令的基本格式为：
+[root@localhost ~]# chown [-R] 所有者:所属组 文件或目录</code></pre><h3 id="3、chgrp"><a href="#3、chgrp" class="headerlink" title="3、chgrp"></a>3、chgrp</h3><pre><code>chgrp：改变文件或目录所属的组。</code></pre><h2 id="（4）文件搜索命令"><a href="#（4）文件搜索命令" class="headerlink" title="（4）文件搜索命令"></a>（4）文件搜索命令</h2><h3 id="1、which"><a href="#1、which" class="headerlink" title="1、which"></a>1、which</h3><pre><code>which：查看命令所在路径
+命令格式：which 命令
+示例：which ls</code></pre><h3 id="2、find"><a href="#2、find" class="headerlink" title="2、find"></a>2、find</h3><pre><code>find：借助搜索关键字（文件名、文件大小、文件所有者等）查找文件或目录
+命令格式：find 搜索路径 [选项] 搜索关键字</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-name</td>
+<td align="center">根据文件名查找</td>
+</tr>
+<tr>
+<td>-size</td>
+<td align="center">根据文件大小查找</td>
+</tr>
+<tr>
+<td>-user</td>
+<td align="center">根据文件所有者查找</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>find</code> 命令功能非常强大，通常用来在 <strong>特定的目录下</strong> <strong>搜索</strong> 符合条件的文件</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>01</td>
+<td>find [路径] -name “*.py”</td>
+<td>查找指定路径下扩展名是 <code>.py</code> 的文件，包括子目录</td>
+</tr>
+</tbody></table>
+<ul>
+<li>如果省略路径，表示在当前文件夹下查找</li>
+<li>之前学习的通配符，在使用 <code>find</code> 命令时同时可用</li>
+</ul>
+<h4 id="演练示例"><a href="#演练示例" class="headerlink" title="演练示例"></a>演练示例</h4><ul>
+<li><ol>
+<li>搜索桌面目录下，文件名包含 <code>1</code> 的文件</li>
+</ol>
+</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">find</span> -name <span class="token string">"*1*"</span></code></pre>
+<ul>
+<li><ol start="2">
+<li>搜索桌面目录下，所有以 <code>.txt</code> 为扩展名的文件</li>
+</ol>
+</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">find</span> -name <span class="token string">"*.txt"</span></code></pre>
+<ul>
+<li><ol start="3">
+<li>搜索桌面目录下，以数字 <code>1</code> 开头的文件</li>
+</ol>
+</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">find</span> -name <span class="token string">"1*"</span></code></pre>
+<h3 id="3、locate"><a href="#3、locate" class="headerlink" title="3、locate"></a>3、locate</h3><pre><code>locate：借助搜索关键字查找文件或目录
+命令格式：locate [选项] 搜索关键字</code></pre><pre class=" language-[]"><code class="language-[]">locate速度远胜于find
+find搜索整个目录，locate搜索数据库/var/lib/locatedb
+即便文件存在，数据库中没有记录，locate便搜索不到</code></pre>
+<h3 id="4、grep"><a href="#4、grep" class="headerlink" title="4、grep"></a>4、grep</h3><pre><code>grep：在文件中搜索与字符串匹配的行并输出
+命令格式：grep 指定字符 源文件</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td align="center">显示匹配行及行号</td>
+</tr>
+<tr>
+<td>-v</td>
+<td align="center">显示不包含匹配文本的所有行（相当于求反）</td>
+</tr>
+<tr>
+<td>-i</td>
+<td align="center">忽略大小写</td>
+</tr>
+</tbody></table>
+<pre><code>搜索连接的字符串时需用 ""，例如：grep -i "hello world" hello.c
+**常用的两种模式查找**
+
+参数|含义
+--|:--:
+^a|行首，搜寻以a开头的行
+a$|行尾，搜寻以a结束的行</code></pre><h3 id="5、wc"><a href="#5、wc" class="headerlink" title="5、wc"></a>5、wc</h3><pre><code>wc：(Word Count)统计指定文件中的字节数、字数、行数，并将统计结果显示输出。
+如果没有给出文件名，则从标准输入读取。wc同时也给出所指定文件的总统计数。
+命令格式：wc [选项] 文件</code></pre><table>
+<thead>
+<tr>
+<th>命令参数</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td align="center">统计字节数</td>
+</tr>
+<tr>
+<td>-l</td>
+<td align="center">统计行数</td>
+</tr>
+<tr>
+<td>-m</td>
+<td align="center">统计字符数,这个标志不能与 -c 标志一起使用</td>
+</tr>
+<tr>
+<td>-w</td>
+<td align="center">统计字数。一个字被定义为由空白、跳格或换行字符分隔的字符串</td>
+</tr>
+<tr>
+<td>-L</td>
+<td align="center">打印最长行的长度</td>
+</tr>
+</tbody></table>
+<h1 id="三、网络管理与通信命令"><a href="#三、网络管理与通信命令" class="headerlink" title="三、网络管理与通信命令"></a>三、网络管理与通信命令</h1><h2 id="1、ifconfig"><a href="#1、ifconfig" class="headerlink" title="1、ifconfig"></a>1、ifconfig</h2><pre><code>ifconfig：显示及设置当前活动的网卡
+（1）显示当前活动的网卡：ifconfig
+（2）重新设置网卡的IP地址：ifconfig  网卡设备名   IP地址
+（3）把指定的一块网卡设为多个虚拟IP地址，n为网卡编号：ifconfig  网卡设备名：n  IP地址
+（4）激活或停止指定网卡：ifconfig  网卡设备名  up|down</code></pre><h2 id="2、netstat"><a href="#2、netstat" class="headerlink" title="2、netstat"></a>2、netstat</h2><pre><code>netstat：用于列出系统上所有的网络替代连接情况，包括tcp，udp以及unix可以替代，另外它还能列出替换监听状态（即等待接收请求）的如果您想确认系统上的Web服务有没有起来，你可以查看80端口有没有打开</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td align="center">列出所有当前的连接</td>
+</tr>
+<tr>
+<td>-t</td>
+<td align="center">列出TCP协议的连接</td>
+</tr>
+<tr>
+<td>-ant</td>
+<td align="center">进一步反向域名解析，加快查询速度</td>
+</tr>
+<tr>
+<td>-l</td>
+<td align="center">只列出监听中的连接</td>
+</tr>
+<tr>
+<td>-p</td>
+<td align="center">获取进程名，进程号以及用户ID</td>
+</tr>
+<tr>
+<td>-s</td>
+<td align="center">打印统计数据</td>
+</tr>
+<tr>
+<td>-r</td>
+<td align="center">显示内核路由信息</td>
+</tr>
+<tr>
+<td>-i</td>
+<td align="center">打印网络接口</td>
+</tr>
+<tr>
+<td>-ct</td>
+<td align="center">netstat持续输出</td>
+</tr>
+<tr>
+<td>-g</td>
+<td align="center">显示多播组信息</td>
+</tr>
+</tbody></table>
+<h2 id="3、ping"><a href="#3、ping" class="headerlink" title="3、ping"></a>3、ping</h2><pre><code>ping：测试网络连接状态
+ping  [-c  报文数]  目的主机地址
+
+如：ping -c 5 192.168.1.60　　//发送五条报文后自动终止命令
+　　ping  192.168.1.60　　//使用Ctrl+C组合键终止该命令，回到提示符状态下。</code></pre><h2 id="4、write"><a href="#4、write" class="headerlink" title="4、write"></a>4、write</h2><pre><code>write：实时发送信息
+write username  [终端号]
+Message　　//消息正文
+Ctrl+D　　　//组合键结束</code></pre><h2 id="5、wall"><a href="#5、wall" class="headerlink" title="5、wall"></a>5、wall</h2><pre><code>wall：向系统中所有用户广播消息：wall  message</code></pre><h1 id="四、压缩解压命令"><a href="#四、压缩解压命令" class="headerlink" title="四、压缩解压命令"></a>四、压缩解压命令</h1><h2 id="1、tar"><a href="#1、tar" class="headerlink" title="1、tar"></a>1、tar</h2><pre><code>tar：（打包命令）打包多个目录或文件，通常与压缩命令一起使用
+命令格式：tar [选项] 目录</code></pre><ul>
+<li><code>tar</code> 是 Linux 中最常用的 <strong>备份</strong>工具，此命令可以 <strong>把一系列文件</strong> 打包到 <strong>一个大文件中</strong>，也可以把一个 <strong>打包的大文件恢复成一系列文件</strong></li>
+<li><code>tar</code> 的命令格式如下：<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 打包文件</span>
+<span class="token function">tar</span> -cvf 打包文件.tar 被打包的文件／路径<span class="token punctuation">..</span>.
+<span class="token comment" spellcheck="true"># 解包文件</span>
+<span class="token function">tar</span> -xvf 打包文件.tar</code></pre>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td align="center">产生.tar打包文件</td>
+</tr>
+<tr>
+<td>-v</td>
+<td align="center">打包时显示详细信息</td>
+</tr>
+<tr>
+<td>-f</td>
+<td align="center">指定压缩包后的文件名,f 后面一定是 .tar 文件，所以必须放选项最后</td>
+</tr>
+<tr>
+<td>-z</td>
+<td align="center">打包，同时通过gzip指定压缩备份文件，压缩后格式为.tar.gz</td>
+</tr>
+<tr>
+<td>-x</td>
+<td align="center">从打包文件中还原文件</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意：<code>f</code> 选项必须放在最后，其他选项顺序可以随意</p>
+</blockquote>
+<h2 id="2、gzip-gunzip"><a href="#2、gzip-gunzip" class="headerlink" title="2、gzip/gunzip"></a>2、gzip/gunzip</h2><pre><code>gzip/gunzip：压缩文件，获得.gz格式的压缩包，压缩后不保存源文件，若同时列出多个文件，则每个文件都会被单独压缩
+命令格式：
+gzip [选项] 文件名
+gunzip [选项] 压缩包包名
+示例：
+#gzip file
+#gzip -s file.gz</code></pre><ul>
+<li><code>tar</code> 与 <code>gzip</code> 命令结合可以使用实现文件 <strong>打包和压缩</strong><ul>
+<li><code>tar</code> 只负责打包文件，但不压缩</li>
+<li>用 <code>gzip</code> 压缩 <code>tar</code> 打包后的文件，其扩展名一般用 <code>xxx.tar.gz</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>在 <code>Linux</code> 中，最常见的压缩文件格式就是 <code>xxx.tar.gz</code></p>
+</blockquote>
+<ul>
+<li><p>在 <code>tar</code> 命令中有一个选项 <strong>-z</strong> 可以调用 <code>gzip</code>，从而可以方便的实现压缩和解压缩的功能</p>
+</li>
+<li><p>命令格式如下：</p>
+</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 压缩文件</span>
+<span class="token function">tar</span> -zcvf 打包文件.tar.gz 被压缩的文件／路径<span class="token punctuation">..</span>.
+
+<span class="token comment" spellcheck="true"># 解压缩文件</span>
+<span class="token function">tar</span> -zxvf 打包文件.tar.gz
+
+<span class="token comment" spellcheck="true"># 解压缩到指定路径</span>
+<span class="token function">tar</span> -zxvf 打包文件.tar.gz -C 目标路径</code></pre>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-C</td>
+<td>解压缩到指定目录，注意：要解压缩的目录必须存在</td>
+</tr>
+</tbody></table>
+<h2 id="3、zip-unzip"><a href="#3、zip-unzip" class="headerlink" title="3、zip/unzip"></a>3、zip/unzip</h2><pre><code>zip/unzip：压缩文件，获得.zip格式的压缩包，压缩后保存源文件
+命令格式：
+zip [-r] [压缩后文件名称] 文件或目录
+unzip [选项] 压缩包包名</code></pre><h2 id="4、bzip2-bunzip2"><a href="#4、bzip2-bunzip2" class="headerlink" title="4、bzip2/bunzip2"></a>4、bzip2/bunzip2</h2><pre><code>bzip2/bunzip2：压缩文件，获得.bz2格式的压缩包，使用选项-k是保留源文件
+命令格式：
+bzip2 [选项] 文件或目录
+bunzip2 [选项] 压缩包包名</code></pre><ul>
+<li><p><code>tar</code> 与 <code>bzip2</code> 命令结合可以使用实现文件 <strong>打包和压缩</strong>（用法和 <code>gzip</code> 一样）</p>
+<ul>
+<li><code>tar</code> 只负责打包文件，但不压缩，</li>
+<li>用 <code>bzip2</code> 压缩 <code>tar</code> 打包后的文件，其扩展名一般用 <code>xxx.tar.bz2</code></li>
+</ul>
+</li>
+<li><p>在 <code>tar</code> 命令中有一个选项 <strong>-j</strong> 可以调用 <code>bzip2</code>，从而可以方便的实现压缩和解压缩的功能</p>
+</li>
+<li><p>命令格式如下：</p>
+</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 压缩文件</span>
+<span class="token function">tar</span> -jcvf 打包文件.tar.bz2 被压缩的文件／路径<span class="token punctuation">..</span>.
+
+<span class="token comment" spellcheck="true"># 解压缩文件</span>
+<span class="token function">tar</span> -jxvf 打包文件.tar.bz2</code></pre>
+<h1 id="五、帮助命令"><a href="#五、帮助命令" class="headerlink" title="五、帮助命令"></a>五、帮助命令</h1><h2 id="1、man"><a href="#1、man" class="headerlink" title="1、man"></a>1、man</h2><pre><code>man：获取Linux系统的帮助文档——manpage中的帮助信息
+命令格式：man [选项] 命令/配置文件</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td align="center">在所有的man帮助手册中搜索</td>
+</tr>
+<tr>
+<td>-p</td>
+<td align="center">指定内容时，使用分页程序</td>
+</tr>
+<tr>
+<td>-M</td>
+<td align="center">指定man手册搜索的路径</td>
+</tr>
+</tbody></table>
+<p>使用man时的操作键：</p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空格键</td>
+<td align="center">显示手册页的下一屏</td>
+</tr>
+<tr>
+<td>Enter键</td>
+<td align="center">一次滚动手册页的下一行</td>
+</tr>
+<tr>
+<td>b</td>
+<td align="center">回滚一屏</td>
+</tr>
+<tr>
+<td>f</td>
+<td align="center">前滚一屏</td>
+</tr>
+<tr>
+<td>q</td>
+<td align="center">退出</td>
+</tr>
+<tr>
+<td>/word</td>
+<td align="center">搜索字符串，word表示你需要搜索的字符串</td>
+</tr>
+</tbody></table>
+<h2 id="2、help"><a href="#2、help" class="headerlink" title="2、help"></a>2、help</h2><pre><code>help：只能获取 Shell 内置命令的帮助，但在 Linux 中绝大多数命令是外部命令，所以 help 命令的作用非常有限。而且内置命令也可以使用 man 命令获取帮助。
+命令格式：help 内置命令</code></pre><pre><code>绝大多数命令都可以使用"--help"选项来査看帮助，这也是一种获取帮助的方法。
+命令格式：命令 --help</code></pre><h2 id="3、whatis"><a href="#3、whatis" class="headerlink" title="3、whatis"></a>3、whatis</h2><pre><code>whatis：查询某个命令的功能描述
+命令格式：whatis 命令</code></pre>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/Ubuntu/">
+                                    <span class="chip bg-color">Ubuntu</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    /* #vcomments .vwrap {
+        box-sizing: border-box;
+        padding: 0 0 44px;
+        background-color: #F0FFF0;
+    }
+    #vcomments .vwrap .vheader{width: 80%;bottom:0;position: absolute;background: #F0FFF0;}
+
+    #vcomments .vinput{padding:10px 15px; text-align: center;}
+
+    #vcomments .vwrap .vheader .vinput{border-bottom:0px}
+
+    #vcomments .vwrap .vedit .vctrl{margin-top:-44px;right:0;position:absolute;margin-right:-3px;}
+
+    #vcomments  .vwrap .vrow{position:absolute;right:0;bottom:0;width:20%;padding-top:0px;}
+
+    #vcomments  .vrow {font-size: 0;padding: 0px 0;}
+
+    #vcomments  .vicon {margin-right: 15px;}
+
+    #vcomments  .vrow .vcol.vcol-30{display: none}
+
+    #vcomments  .vedit .vctrl span.vpreview-btn{display: none}
+
+    #vcomments  .vrow .vcol.vcol-70{width: 100%;}
+
+    #vcomments  .vsubmit.vbtn{border-radius: 0;padding: 0;color: #fff;line-height: 44px;width:100%;border: none;background:#00ecbc;}
+
+    #vcomments  .vcards .vcard .vh .vhead .vsys{background: #F0FFF0;}
+
+    #vcomments  .vcards .vcard .vh .vmeta .vat{font-size: 12px;display: block;margin-left: 15px;float: right;color: #fff;background-color: #00ecbc;line-height: 20px;padding: 0 6px;border-radius: 3px;}
+
+    @media screen and (max-width: 520px){
+    #vcomments  .vwrap .vheader .vinput{width: 33.33%;padding:10px 5px;}  
+    } */
+
+    #vcomments input[type=text],
+
+    #vcomments input[type=email],
+
+    #vcomments input[type=url],
+
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+    #vcomments .vwrap p {
+        height: 20px;
+        width: 20px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    /* 修复评论第一行位置错位 */
+    .v .vlist .vcard {
+    padding-top: 2.5em !important ;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        admin_email: '2292807998@qq.com',
+        appId: 'vDtNtruYzjCbFJbWyeQ8Bybw-gzGzoHsz',
+        appKey: 'TJv4iKCEAYMHDhy8V8IvAJGF',
+        path: window.location.pathname,
+        comment_count: true,
+        notify: 'false' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'retro',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'ヾﾉ≧∀≦)o在这里可以留言评论喔！',
+
+    });
+    $(document).ready(function(){
+        $("#vcomments").on('click', 'span.vat',function(){
+            $(this).parent('div.vmeta').next("div.vcontent").after($("div.vwrap"));
+            $('textarea#veditor').focus();
+        })
+    })
+</script>
+<!-- <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+    jinrishici.load(function(result) {
+        var jrsc_plac =  result.data.content + "\n「" + result.data.origin.title + "」" + result.data.origin.dynasty + " · " + result.data.origin.author
+        document.getElementById("veditor").setAttribute("placeholder",jrsc_plac);
+    });
+</script> -->
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/archives/10224/">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/lskjwp/image@master/imageCover/Linux二.jpg" class="responsive-img" alt="Linux相关知识点及远程管理常用命令">
+                        
+                        <span class="card-title">Linux相关知识点及远程管理常用命令</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Linux相关知识点及远程管理常用命令。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/archives/db8edda9/">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/lskjwp/image@master/imageCover/win系统安装教程.jpg" class="responsive-img" alt="win系统安装教程">
+                        
+                        <span class="card-title">win系统安装教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            制作PE来安装系统，启动选用的是微PE。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Windows/" class="post-category">
+                                    Windows
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Windows/">
+                        <span class="chip bg-color">Windows</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" >
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down" >
+        <a class="btn-floating btn-large waves-effect waves-light" title="展开/关闭TOC">
+            <i class="fas fa-list-ul" style="zoom: 0.88;"></i>
+        </a>
+    </div>
+<!-- <div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div> -->
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="6668004913"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">勇也很努力</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">317.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv" style="display: none;">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv" style="display:none">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "7";
+                    var startDate = "1";
+                    var startHour = "14";
+                    var startMinute = "24";
+                    var startSecond = "48";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2292807998@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2292807998" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2292807998" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<script>
+    /*
+    修改不蒜子初始化计数
+    */
+    $(document).ready(function () {
+
+        var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+        var pvcountOffset = 3000;  // 初始化首次数据
+        var uvcountOffset = 1100;
+
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int); // 停止检测
+            }
+        }
+    });
+</script>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" title="返回顶部">
+        <i class="fas fa-arrow-up" style="zoom: 0.88;"></i>
+    </a>
+</div>
+
+    <!-- <script src="/js/fireworks.js"></script> -->
+    <!-- <script src="/js/cursor.js"></script> -->
+    <!-- <script src="/js/click_show_text.js"></script> -->
+    <!-- <script src="/js/snow.js"></script> -->
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "f9383031"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <script type="text/javascript">
+        var OriginTitile=document.title,st;
+        document.addEventListener("visibilitychange",function(){
+            document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+        })
+    </script>
+
+    <!--夜晚模式-->
+    <script>
+        if (localStorage.getItem('dark') === '1') {
+        document.body.classList.add('dark');
+        }
+        else if (new Date().getHours() >= 22 || new Date().getHours() < 7) {
+        document.body.classList.add('dark');
+        } 
+        else if (matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+        }
+    </script>
+
+    <!--全屏-->
+    <script src="/js/fullscreen.js" type="module"></script>
+    <a onclick="switchNightMode()" id="sma">
+        <i class="fa fa-moon-o" id="nightMode" aria-hidden="true"></i>
+    </a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>

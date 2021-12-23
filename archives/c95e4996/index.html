@@ -1,0 +1,2439 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="code-p6MPyNrcYn">
+    <meta charset="utf-8">
+    <meta name="keywords" content="MySQL数据库的学习, HTML,CSS,JavaScript,JQuery,Java,Vue,学习笔记,生活随笔">
+    <meta name="description" content="关闭一扇窗，另一扇等着你打开！往事如烟，浅笑而安。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>MySQL数据库的学习 | lskj</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+<style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+    
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+    
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+    
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+    
+   
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="lskj" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+    
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+    
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+    
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+    
+   
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },1000); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+ </script>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+
+
+ <div id="loading-container">
+     <p class="loading-text">玩命加载中 . . . </p> 
+     <div class="loading-image">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div> 
+         <div></div>
+     </div>
+ </div><body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--动态背景-->
+    <!-- <div id="bg"><canvas></canvas><canvas></canvas><canvas></canvas></div>
+    <script src="/js/canva_moving_effect.js"></script> -->
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lskj</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/galleries" class="waves-effect waves-light">
+      
+      <i class="fas fa-image" style="zoom: 0.6;"></i>
+      
+      <span>相册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/navigate" class="waves-effect waves-light">
+      
+      <i class="fas fa-location-arrow" style="zoom: 0.6;"></i>
+      
+      <span>导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <!--全屏-->
+  <li id="fullscreen_li" class="fullscreen"><a href="javascript:void(0);" class="modal-trigger waves-effect waves-light"><i id="fullscreen" class="fas fa-expand-arrows-alt" title="全屏" style="zoom: 0.65;"></i></a></li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lskj</div>
+        <div class="logo-desc">
+            
+            关闭一扇窗，另一扇等着你打开！往事如烟，浅笑而安。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/galleries" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-image"></i>
+			
+			相册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/navigate" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-location-arrow"></i>
+			
+			导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<!-- <div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lskjwp/image@master/imageCover/MySql数据库学习.jpg')"> -->
+    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MySQL数据库的学习</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+        background-color: rgb(255, 255, 255,0.7);
+        border-radius: 10px;
+        box-shadow: 0 10px 35px 2px rgba(0, 0, 0, .15), 0 5px 15px rgba(0, 0, 0, .07), 0 2px 5px -5px rgba(0, 0, 0, .1) !important;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        background: linear-gradient(to bottom right,#61B5F3 0%, #26D6D1 100%);
+        width: 35px;
+        height: 35px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 35px;
+        position: absolute;
+        right: 0px;
+        /* font-size: 1.4rem; */
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/MySQL/" class="post-category">
+                                MySQL
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:
+                    2020-04-14
+                </div>
+                
+
+                
+
+                <!--添加作者信息--> 
+                <div class="info-break-policy"> 
+                     
+                        <i class="fa fa-pencil"></i> 作者: 勇也很努力
+                     
+                </div>
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:
+                    6.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:
+                    23 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>学习视频链接：<a href="https://www.bilibili.com/video/BV1fx411X7BD" target="_blank" rel="noopener">B站 动力节点</a></p>
+<a id="more"></a>
+<h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><h2 id="1、SQL、DB、DBMS分别是："><a href="#1、SQL、DB、DBMS分别是：" class="headerlink" title="1、SQL、DB、DBMS分别是："></a>1、SQL、DB、DBMS分别是：</h2><pre><code>SQL：结构化查询语言，是一门标准通用的语言。
+DB：DataBase（数据库，数据库实际上在硬盘上以文件的形式存在）。
+DBMS：数据库管理系统。
+DBMS负责执行SQL语句，通过执行SQL语句来操作DB当中的数据。</code></pre><h2 id="2、表"><a href="#2、表" class="headerlink" title="2、表"></a>2、表</h2><pre><code>    表：table是数据库的基本组成单元。
+    一个表包括行和列：
+        行：被称为数据/记录（data）
+        列：被称为字段（column）
+            每一个字段应该包括哪些属性？
+                字段名，数据类型，相关的约束</code></pre><h2 id="3、SQL语句划分："><a href="#3、SQL语句划分：" class="headerlink" title="3、SQL语句划分："></a>3、SQL语句划分：</h2><pre><code>    DQL（数据查询语言）：查询语句，凡是select语句都是DQL。
+    DML（数据操作语言）：insert delete update，对表中的数据进行增删改。
+    DDL（数据定义语言）：create drop alter，对表结构的增删改。
+    TCL（事务控制语言）：commit提交事务，rollback回滚事务。
+    DCL（数据控制语言）：grant授权，revoke撤销权限等。</code></pre><h2 id="4、MySQL安装"><a href="#4、MySQL安装" class="headerlink" title="4、MySQL安装"></a>4、MySQL安装</h2><p><strong>window下使用压缩包安装：</strong></p>
+<p>下载地址：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/mysql/</a></p>
+<p>1、下载完成后，进行解压（不要解压放到含有中文和空格的目录下）。</p>
+<p>2、在解压后与bin同目录下新建<code>my.ini</code>文件和data文件夹（8版本以后初始化后会自动生成）。</p>
+<p>3、编辑my.ini：</p>
+<pre class=" language-ini"><code class="language-ini"><span class="token selector">[mysql]</span>
+# 设置mysql客户端默认字符集
+<span class="token constant">default-character-set</span><span class="token attr-value"><span class="token punctuation">=</span>utf8</span>
+<span class="token selector">[mysqld]</span>
+#设置3306端口
+<span class="token constant">port</span> <span class="token attr-value"><span class="token punctuation">=</span> 3306</span>
+# 设置mysql的安装目录
+<span class="token constant">basedir</span><span class="token attr-value"><span class="token punctuation">=</span>D:\mysql-5.7.30-winx64\mysql-5.7.30-winx64</span>
+# 设置mysql数据库的数据的存放目录
+<span class="token constant">datadir</span><span class="token attr-value"><span class="token punctuation">=</span>D:\mysql-5.7.30-winx64\mysql-5.7.30-winx64\data</span>
+# 允许最大连接数
+<span class="token constant">max_connections</span><span class="token attr-value"><span class="token punctuation">=</span>200</span>
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+<span class="token constant">character-set-server</span><span class="token attr-value"><span class="token punctuation">=</span>utf8</span>
+# 创建新表时将使用的默认存储引擎
+<span class="token constant">default-storage-engine</span><span class="token attr-value"><span class="token punctuation">=</span>INNODB</span>
+
+#跳过登录密码验证
+skip-grant-tables</code></pre>
+<p>my.ini必须保存为ANSI格式（配置文件默认就是是ANSI编码格式）</p>
+<p>4、设置环境变量。</p>
+<table>
+<thead>
+<tr>
+<th align="center">变量</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">MYSQL_HOME</td>
+<td align="center">MySQL解压的文件路径（不含bin）</td>
+</tr>
+<tr>
+<td align="center">Path</td>
+<td align="center">%MYSQL_HOME%\bin</td>
+</tr>
+</tbody></table>
+<p>5、以管理员身份打开cmd命令窗口，并将路径切换至mysql下的bin目录，然后输入<code>mysqld -install</code>（安装mysql）。</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">#安装mysql服务，mysqld --install [服务名称，默认是MySQL]</span>
+mysqld install
+
+<span class="token comment" spellcheck="true">#卸载mysql服务</span>
+sc <span class="token keyword">delete</span> mysql<span class="token punctuation">(</span>需要管理员权限<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">#移除mysql服务（需要停止mysql）</span>
+mysqld <span class="token operator">-</span>remove</code></pre>
+<p>执行安装命令成功后一般会出现<strong>Service successfully installed</strong>。</p>
+<p>6、输入<code>mysqld  --initialize-insecure --user=mysql</code>初始化数据库。</p>
+<pre><code>mysqld  --initialize-insecure --user=mysql</code></pre><p>7、开启MySQL服务。</p>
+<pre><code>net start mysql</code></pre><p><strong>启动成功：MySQL服务已经启动成功。</strong></p>
+<p>8、登录MySQL。</p>
+<pre><code>mysql -uroot -p</code></pre><p>不用输密码，直接回车。</p>
+<p>9、登录成功后，修改root密码。</p>
+<pre><code>mysql&gt;update mysql.user set authentication_string=password('root') where user='root' and Host='localhost';</code></pre><p>修改成功后，输入</p>
+<pre><code>flush privileges;</code></pre><p>刷新权限。</p>
+<p>10、修改<code>my.ini</code>文件。</p>
+<p>删除或注释掉最后一句<code>skip-grant-tables</code>。</p>
+<p>11、重启mysql即可正常使用。</p>
+<pre><code>net stop mysql
+net start mysql</code></pre><h1 id="二、常用命令"><a href="#二、常用命令" class="headerlink" title="二、常用命令"></a>二、常用命令</h1><pre><code>1、登录mysql数据库管理系统
+    mysql -u&lt;user name&gt; -p&lt;user password&gt;
+        (-p后可填写密码，也可不写【回车后输入密码，密码不可见】)
+2、查看有哪些数据库
+    show databases;
+3、创建数据库
+    create database &lt;database name&gt;;
+4、使用数据库
+    use &lt;database name&gt;;
+5、查看当前使用的数据库中有哪些表
+    show tables;
+        查看其它库中的表：
+            show tables from &lt;database name&gt;;
+6 、初始化数据
+    source 文件绝对路径
+7、文件以sql结尾，这样的文件称为“sql脚本”。
+    当一个文件的扩展名是.sql，并且该文件中编写了大量的sql语句，故称这样的文件为sql脚本。
+    直接使用source命令可以执行sql脚本。sql脚本中的数据量大的时候，无法打开，需使用source命令初始化。
+8、删除数据库
+    drop database &lt;database name&gt;;
+9、查看表结构
+    desc &lt;table name&gt;;
+10、查看表中数据
+    select * from&lt;table name&gt;;
+11、查看当前使用的数据库
+    select database();
+12、、查看数据库版本
+    select version();
+13、\c命令，结束一条语句
+14、exit或quit命令，退出MySQL
+15、查看创建表的语句
+    show create table &lt;table name&gt;;</code></pre><h1 id="三、简单的查询语句（DQL）"><a href="#三、简单的查询语句（DQL）" class="headerlink" title="三、简单的查询语句（DQL）"></a>三、简单的查询语句（DQL）</h1><pre class=" language-[]"><code class="language-[]">select 字段名1,字段名2,字段名3,... from 表名;</code></pre>
+<p>字段可以参与数学运算。</p>
+<h2 id="1、"><a href="#1、" class="headerlink" title="1、"></a>1、</h2><pre class=" language-[]"><code class="language-[]">任何一条sql语句以`;`结尾。
+sql语句不区分大小写。</code></pre>
+<h2 id="2、给查询结果重命名"><a href="#2、给查询结果重命名" class="headerlink" title="2、给查询结果重命名"></a>2、给查询结果重命名</h2><pre class=" language-[]"><code class="language-[]">select 字段名1,字段名2,字段名3,... as ### from 表名;</code></pre>
+<pre class=" language-[]"><code class="language-[]">标准sql语句中要求`字符串`使用`单引号`括起来，虽然MySQL支持双引号，建议尽量少使用。
+`as`关键字可以省略。</code></pre>
+<h2 id="3、查询所有字段"><a href="#3、查询所有字段" class="headerlink" title="3、查询所有字段"></a>3、查询所有字段</h2><pre><code>select * from 表名;</code></pre><h1 id="四、条件查询"><a href="#四、条件查询" class="headerlink" title="四、条件查询"></a>四、条件查询</h1><pre class=" language-[]"><code class="language-[]">select
+    字段,字段,...
+from
+    表名    
+where
+    条件;</code></pre>
+<p>条件查询需要用到where语句，where必须放到from语句表的后面。支持如下运算符：</p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">=</td>
+<td align="center">等于</td>
+</tr>
+<tr>
+<td align="center">&lt;&gt;或!=</td>
+<td align="center">不等于</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于等于</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于等于</td>
+</tr>
+<tr>
+<td align="center">between…and…</td>
+<td align="center">[左小右大]两个值之间,等同于 &gt;= and &lt;=</td>
+</tr>
+<tr>
+<td align="center">is null</td>
+<td align="center">为null（is not null 不为空）</td>
+</tr>
+<tr>
+<td align="center">and</td>
+<td align="center">并且</td>
+</tr>
+<tr>
+<td align="center">or</td>
+<td align="center">或者</td>
+</tr>
+<tr>
+<td align="center">in</td>
+<td align="center">包含，相当于多个or（not in不在这个范围中）</td>
+</tr>
+<tr>
+<td align="center">not</td>
+<td align="center">not可以取非，主要用在is或in中</td>
+</tr>
+<tr>
+<td align="center">like</td>
+<td align="center">like称为模糊查询，支持%或下划线匹配</td>
+</tr>
+<tr>
+<td align="center">%</td>
+<td align="center">匹配任意个字符</td>
+</tr>
+<tr>
+<td align="center">_</td>
+<td align="center">下划线，一个下划线只匹配一个字符</td>
+</tr>
+</tbody></table>
+<h2 id="1、模糊查询like"><a href="#1、模糊查询like" class="headerlink" title="1、模糊查询like"></a>1、模糊查询like</h2><p><code>%</code>代表任意多个字符，<code>_</code>代表任意一个字符<br>若查询的数据中存在<code>_</code>，需要转译<code>\_</code></p>
+<h2 id="2、排序（升序、降序）"><a href="#2、排序（升序、降序）" class="headerlink" title="2、排序（升序、降序）"></a>2、排序（升序、降序）</h2><pre class=" language-[]"><code class="language-[]">select
+    字段,字段,...
+from
+    表名    
+<where
+    条件>
+order by
+    需排序的字段 <asc\desc>;</code></pre>
+<p>默认是升序，<code>asc</code>表示升序，<code>desc</code>表示降序。执行顺序<code>from-&gt;where-&gt;select-&gt;order by</code><br>越靠前的字段越能起到主导作用。只有当前面的字段无法完成排序时，才会启用后面的字段。</p>
+<h1 id="五、处理函数"><a href="#五、处理函数" class="headerlink" title="五、处理函数"></a>五、处理函数</h1><h2 id="1、单行处理函数"><a href="#1、单行处理函数" class="headerlink" title="1、单行处理函数"></a>1、单行处理函数</h2><pre><code>输入一行，输出一行。</code></pre><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lower(字段名)</td>
+<td>转换小写</td>
+</tr>
+<tr>
+<td>upper(字段名)</td>
+<td>转换大写</td>
+</tr>
+<tr>
+<td>substr(字段名,起始下标,截叏长度)</td>
+<td>取子串</td>
+</tr>
+<tr>
+<td>length(字段名)</td>
+<td>取长度</td>
+</tr>
+<tr>
+<td>trim(‘字符串’)</td>
+<td>去除首尾空格，不会去除中间空格</td>
+</tr>
+<tr>
+<td>str_to_date(‘日期字符串’,’日期格式’)</td>
+<td>将字符串转换成日期</td>
+</tr>
+<tr>
+<td>date_format(日期类型数据,’日期格式’)</td>
+<td>格式化日期</td>
+</tr>
+<tr>
+<td>format</td>
+<td>设置千分位</td>
+</tr>
+<tr>
+<td>round(数字,保留小数位数)</td>
+<td>四舍五入，默认保留整数位</td>
+</tr>
+<tr>
+<td>rand()</td>
+<td>生成随机数</td>
+</tr>
+<tr>
+<td>ifnull(字段名,替换值)</td>
+<td>可以将null转换成一个具体的值</td>
+</tr>
+</tbody></table>
+<p>在数据库中，只要有null参与数学运算，其结果一定为null。为了防止计算结果出现null，建议先使用ifnull()函数预先处理。</p>
+<center>MySql日期格式：</center>
+
+<table>
+<thead>
+<tr>
+<th>格式符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%Y</td>
+<td>代表四位的年份</td>
+</tr>
+<tr>
+<td>%y</td>
+<td>代表两位的年份</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>代表月，格式(01 …12)</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>代表月，格式(1 … 12)</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>代表日</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>代表24小时制</td>
+</tr>
+<tr>
+<td>%h</td>
+<td>代表12小时制</td>
+</tr>
+<tr>
+<td>%i</td>
+<td>代表分种，格式(00 … 59)</td>
+</tr>
+<tr>
+<td>%S或%s</td>
+<td>代表秒,格式(00..59)</td>
+</tr>
+</tbody></table>
+<h2 id="2、分组函数【多行处理函数】"><a href="#2、分组函数【多行处理函数】" class="headerlink" title="2、分组函数【多行处理函数】"></a>2、分组函数【多行处理函数】</h2><pre><code>多行输入，一行输出</code></pre><p>所有的分组函数都是对“某一组”数据进行操作，分组函数会自动忽略空值，不需要手劢增加where条件排除空值。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sum(字段名)</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg(字段名)</td>
+<td>取平均</td>
+</tr>
+<tr>
+<td>max(字段名)</td>
+<td>取最大值</td>
+</tr>
+<tr>
+<td>min(字段名)</td>
+<td>取最小值</td>
+</tr>
+<tr>
+<td>count(字段名)</td>
+<td>表示统计某个字段中不为null的数据总数量</td>
+</tr>
+<tr>
+<td>count(*)</td>
+<td>表示取得当前查询表所有记录(统计总记录条数)</td>
+</tr>
+</tbody></table>
+<h2 id="3、group-by-和-having"><a href="#3、group-by-和-having" class="headerlink" title="3、group by 和 having"></a>3、group by 和 having</h2><pre class=" language-[]"><code class="language-[]">select
+    ...
+from
+    ...
+where
+    ...
+group by
+    ...
+having
+    ...
+order by
+    ...</code></pre>
+<p>执行顺序：from-&gt;where-&gt;group by-&gt;having-&gt;select-&gt;order by。</p>
+<p>group by 字段名称：按照某个字段或者某些字段进行分组。<br>having：<code>having</code>是对分组之后的数据进行再次过滤。</p>
+<p>分组函数一般都会和group by联合使用，这也是为什么它会被称为分数函数的原因。<br>并且任何一个分组函数(count sum avg max min)都是在group by语句执行结束后才会执行。<br>当一条SQL语句没有group by的话，整张表的数据会自成一组。</p>
+<pre class=" language-[]"><code class="language-[]">where ...中的...中不能`直接`有分组函数(count sum avg max min)；
+有 group by 的SQL询句中，select 语句后面只能跟 分组函数 和 参与分组的字段。</code></pre>
+<p>若在有<code>group by</code>的SQL询句中，<code>select</code>语句后跟有 除分组相关 的字段，查询结果是有的，但毫无意义。</p>
+<h2 id="4、distinct-去除重复记录"><a href="#4、distinct-去除重复记录" class="headerlink" title="4、distinct 去除重复记录"></a>4、distinct 去除重复记录</h2><p>作用：将<code>查询结果</code>中某一字段的的重复记录去除掉<br>用法：distinct 字段名或 distinct 字段名1, 字段名2 … …<br>distinct 字段名A：去除不字段名A相同的记录<br>distinct 字段名A,字段名B：去除不字段名A和字段名B同时相同的记录</p>
+<p>注意：distinct只能出现在所有字段<code>最前面</code>，后面如果有多个字段则为多字段联合去重。</p>
+<h1 id="六、连接查询"><a href="#六、连接查询" class="headerlink" title="六、连接查询"></a>六、连接查询</h1><h2 id="1、连接查询的分类"><a href="#1、连接查询的分类" class="headerlink" title="1、连接查询的分类"></a>1、连接查询的分类</h2><pre class=" language-[]"><code class="language-[]">SQL92
+SQL99</code></pre>
+<pre class=" language-[]"><code class="language-[]">    内连接
+        等值连接
+        非等值连接
+        自连接
+    外连接
+        左外连接（左连接）
+        右外连接（右连接）
+    全连接</code></pre>
+<h2 id="2、笛卡尔积现象"><a href="#2、笛卡尔积现象" class="headerlink" title="2、笛卡尔积现象"></a>2、笛卡尔积现象</h2><p>若两张表迚行连接查询的时候没有任何条件限制，最终的查询结果总数是两张表记录的乘积，该现象称为笛卡尔积现象(笛卡尔乘积现象)。</p>
+<p>增加条件进行过滤，避免笛卡尔积现象。（避免笛卡尔积并不会减少匹配次数，只不过显示有效的记录，故也不会提高效率）</p>
+<pre class=" language-[]"><code class="language-[]"><1>执行效率高；
+<2>可读性好。</code></pre>
+<h2 id="3、内连接"><a href="#3、内连接" class="headerlink" title="3、内连接"></a>3、内连接</h2><h3 id="1-、等值连接"><a href="#1-、等值连接" class="headerlink" title="(1)、等值连接"></a>(1)、等值连接</h3><p>最大特点：条件是等量关系。</p>
+<pre class=" language-[]"><code class="language-[]">#SQL92
+    select
+        e.ename,d.dname
+    from
+        emp e,dept d
+    where
+        e.deptno = d.deptno;
+
+#SQL99
+    select
+        e.ename,d.dname
+    from
+        emp e
+    inner join
+        dept d
+    on
+        e.deptno = d.deptno;
+//inner可省略
+</code></pre>
+<p>SQL99语法（等值连接）：</p>
+<pre><code>...
+    A
+join
+    B
+on
+    连接条件
+...</code></pre><h3 id="2-、非等值连接"><a href="#2-、非等值连接" class="headerlink" title="(2)、非等值连接"></a>(2)、非等值连接</h3><p>最大特点：连接条件中的关系是非等量关系。</p>
+<h3 id="3-、自连接"><a href="#3-、自连接" class="headerlink" title="(3)、自连接"></a>(3)、自连接</h3><p>最大的特点：一张表看作两张表。自己连自己。</p>
+<h2 id="4、外连接"><a href="#4、外连接" class="headerlink" title="4、外连接"></a>4、外连接</h2><p>其最主要的特点：主表的数据无条件全部查询出来。</p>
+<pre><code>select
+    ...
+from
+    A
+left\right &lt;outer&gt; join
+    B
+on
+    连接条件
+where
+    ...</code></pre><h3 id="1-、左连接"><a href="#1-、左连接" class="headerlink" title="(1)、左连接"></a>(1)、左连接</h3><p>表示左边的表是主表。</p>
+<h3 id="2-、右连接"><a href="#2-、右连接" class="headerlink" title="(2)、右连接"></a>(2)、右连接</h3><p>表示右边的便是主表。</p>
+<h2 id="5、内连接与外连接的区别"><a href="#5、内连接与外连接的区别" class="headerlink" title="5、内连接与外连接的区别"></a>5、内连接与外连接的区别</h2><pre><code>假如有两张表，Ａ表和B表。
+    &lt;1&gt;内连接：只查询两张表匹配的记录，两张表是平等的。
+    &lt;2&gt;外连接：两张表有主副之分，不匹配的记录用NULL填充。
+因为内连接与外连接的`inner`与`outer`可以省略，所以区分是内还是外主要看是否有`left\right`，有则为外连接，反之内连接。</code></pre><h2 id="6、全连接"><a href="#6、全连接" class="headerlink" title="6、全连接"></a>6、全连接</h2><p>包含左、右两个表的全部行，不管另外一边的表中是否存在不它们匹配的行。</p>
+<h1 id="七、子查询"><a href="#七、子查询" class="headerlink" title="七、子查询"></a>七、子查询</h1><p>select语句当中嵌套select语句，被嵌套的select语句是子查询。<br>select子句可出现在<code>select</code>、<code>from</code>、<code>where</code>关键字后面。</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">&lt;</span><span class="token keyword">select</span><span class="token operator">></span>
+<span class="token keyword">from</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">&lt;</span><span class="token keyword">select</span><span class="token operator">></span>
+<span class="token keyword">where</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">&lt;</span><span class="token keyword">select</span><span class="token operator">></span></code></pre>
+<h1 id="八、union"><a href="#八、union" class="headerlink" title="八、union"></a>八、union</h1><p>将查询的结果集合并。<br>合并结果集的时候，查询<code>字段的个数</code>必须相同。</p>
+<h1 id="九、limit-MySQL特有"><a href="#九、limit-MySQL特有" class="headerlink" title="九、limit(MySQL特有)"></a>九、limit(MySQL特有)</h1><p>获取一表前几条戒中间某几行数据。【分页查询使用】</p>
+<pre class=" language-sql"><code class="language-sql">    <span class="token keyword">limit</span> startIndex<span class="token punctuation">,</span> length 表示
+        startIndex表示起始位置，从<span class="token number">0</span>开始，<span class="token number">0</span>表示第一条数据。
+        length表示从startIndex<span class="token operator">+</span><span class="token number">1</span>开始，取length个。</code></pre>
+<p>limit在SQL语句中最后执行。</p>
+<pre><code>通用的标准分页sql
+假设每页显示pageSize条记录：
+
+第pageNo页：(pageNo - 1) * pageSize, pageSize
+
+pageSize表示每页显示多少条记录
+pageNo表示显示第几页</code></pre><h1 id="十、表【概述中提及】"><a href="#十、表【概述中提及】" class="headerlink" title="十、表【概述中提及】"></a>十、表【概述中提及】</h1><p>表（table）：是数据库最基本的组成单元，数据库是用来存储数据的，数据库中有很多表，每一个表都是一个独立的单元，表也是一个结构化的文件，由行和列组成，行称为数据库记录，列称为字段。</p>
+<p>字段包含：字段名称、字段类型、长度、约束。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>对应Java类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char</td>
+<td>String</td>
+<td>定长字符串，存储空间大小固定</td>
+</tr>
+<tr>
+<td>varchar</td>
+<td>StringBuffer/StringBuilder</td>
+<td>变长字符串，存储空间等与实际的数据空间</td>
+</tr>
+<tr>
+<td>int</td>
+<td>int</td>
+<td>表示整型</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>long</td>
+<td>表示长整型</td>
+</tr>
+<tr>
+<td>float(有效数字位数,小数位)</td>
+<td>float</td>
+<td>数值型</td>
+</tr>
+<tr>
+<td>double(有效数字位数,小数位)</td>
+<td>double</td>
+<td>数值型</td>
+</tr>
+<tr>
+<td>date</td>
+<td>java.sql.Date</td>
+<td>表示日期和时间</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>Object</td>
+<td>Binary Large Object(二进制大对象，存储图片、视频等流媒体信息)</td>
+</tr>
+<tr>
+<td>CLOB</td>
+<td>Object</td>
+<td>Character Large Obje(字符大对象，存储较大文本)</td>
+</tr>
+</tbody></table>
+<p>顺序要求：</p>
+<pre><code>        删除数据的时候，先删除子表，再删除父表。
+        添加数据的时候，先添加父表，在添加子表。
+        创建表的时候，先创建父表，再创建子表。
+        删除表的时候，先删除子表，在删除父表。</code></pre><h2 id="1、创建表"><a href="#1、创建表" class="headerlink" title="1、创建表"></a>1、创建表</h2><p>语法格式：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> 表名称<span class="token punctuation">(</span>字段名 类型<span class="token punctuation">(</span>长度<span class="token punctuation">)</span> 约束<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>表名称建议<code>t_</code>开头。</p>
+<h2 id="2、插入数据"><a href="#2、插入数据" class="headerlink" title="2、插入数据"></a>2、插入数据</h2><p>语法格式：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">insert</span> <span class="token keyword">into</span> 表名<span class="token punctuation">(</span>字段<span class="token number">1</span><span class="token punctuation">,</span>字段<span class="token number">2</span><span class="token punctuation">.</span>字段<span class="token number">3</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token keyword">value</span><span class="token punctuation">(</span>值<span class="token number">1</span><span class="token punctuation">,</span>值<span class="token number">2</span><span class="token punctuation">,</span>值<span class="token number">3</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>字段的数量和值的数量相同，并且数据类型要对应相同。<br>字段可以省略不写，但是value值的顺序、数量必须与表中字段对应。</p>
+<h2 id="3、表的复制"><a href="#3、表的复制" class="headerlink" title="3、表的复制"></a>3、表的复制</h2><p>语法格式：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> 表名 <span class="token keyword">as</span> <span class="token keyword">select</span>语句<span class="token punctuation">;</span></code></pre>
+<p>将查询结果当作表创建出来。</p>
+<h2 id="4、修改数据"><a href="#4、修改数据" class="headerlink" title="4、修改数据"></a>4、修改数据</h2><p>语法格式：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">update</span> 表名 <span class="token keyword">set</span> 字段<span class="token number">1</span><span class="token operator">=</span>值<span class="token number">1</span><span class="token punctuation">,</span>字段<span class="token number">2</span><span class="token operator">=</span>值<span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">where</span> 条件<span class="token punctuation">;</span></code></pre>
+<p>没有条件整张表数据全部更新。</p>
+<h2 id="5、删除数据"><a href="#5、删除数据" class="headerlink" title="5、删除数据"></a>5、删除数据</h2><p>语法格式：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">delete</span> <span class="token keyword">from</span> 表名 <span class="token keyword">where</span> 条件<span class="token punctuation">;</span></code></pre>
+<p>没有条件则将表中的数据全部删除。</p>
+<p>删除大表中的数据：</p>
+<pre><code>truncate table 表名; // 表被截断，不可回滚。永久丢失。</code></pre><p>增删改查有一个术语：CRUD操作<br>Create（增） Retrieve（检索） Update（修改） Delete（删除）</p>
+<h2 id="6、增-删-改-表结构"><a href="#6、增-删-改-表结构" class="headerlink" title="6、增/删/改 表结构"></a>6、增/删/改 表结构</h2><pre><code>新增：ALTER TABLE 表名 ADD 字段名 字段类型(长度)；
+修改：ALTER TABLE 表名 MODIFY 字段名 字段类型(长度)；
+删除：ALTER TABLE 表名 DROP 字段名; </code></pre><h2 id="7、删除表"><a href="#7、删除表" class="headerlink" title="7、删除表"></a>7、删除表</h2><pre><code>drop table 表名;
+drop table if exists 表名; </code></pre><h2 id="8、约束-Constraint"><a href="#8、约束-Constraint" class="headerlink" title="8、约束 Constraint"></a>8、约束 Constraint</h2><p>在创建表的时候，可以给表的字段添加相应的约束，添加约束的目的是为了保证表中数据的<code>合法性</code>、<code>有效性</code>、<code>完整性</code>。</p>
+<p>常见的约束：</p>
+<pre><code>    非空约束(not null)：约束的字段不能为NULL。
+    唯一约束(unique)：约束的字段不能重复。
+    主键约束(primary key)：约束的字段既不能为NULL，也不能重复。
+    外键约束(foreign key)：用于在两个表之间建立关系,需要指定引用主表的哪一列。
+    检查约束(check)：目前MySQL不支持该约束。</code></pre><h3 id="1-非空约束-not-null"><a href="#1-非空约束-not-null" class="headerlink" title="(1)非空约束(not null)"></a>(1)非空约束(not null)</h3><p><code>not null</code>约束的字段不能为<code>NULL</code>值，必须赋具体数据。<br>not null约束只有列级约束。没有表级约束。</p>
+<h3 id="2-唯一约束-unique"><a href="#2-唯一约束-unique" class="headerlink" title="(2)唯一约束(unique)"></a>(2)唯一约束(unique)</h3><p>唯一约束修饰的字段具有唯一性，不能重复。但可以为NULL。<br>列级约束：字段后使用unique。</p>
+<pre><code>create table t_user(
+            id int,
+            name varchar(255) unique  // 列级约束
+        );</code></pre><p>表级约束：多个字段联合起来使用unique。</p>
+<pre><code>create table t_user(
+            id int, 
+            username varchar(255),
+            sex char(2),
+            unique(name,sex) // 多个字段联合起来添加1个约束unique 【表级约束】
+        );</code></pre><h3 id="3-主键约束PK-primary-key"><a href="#3-主键约束PK-primary-key" class="headerlink" title="(3)主键约束PK(primary key)"></a>(3)主键约束PK(primary key)</h3><h4 id="主键："><a href="#主键：" class="headerlink" title="主键："></a>主键：</h4><p>表中某个字段添加主键约束之后，该字段被称为主键字段，主键字段中出现的每一个数据都被称为主键值。</p>
+<h5 id="主键的作用："><a href="#主键的作用：" class="headerlink" title="主键的作用："></a>主键的作用：</h5><p>&lt;1&gt;添加主键primary key的字段即不能重复也不能为空，主键值是这行记录在这张表当中的唯一标识。<br>&lt;2&gt;表的设计三范式中有要求，第一范式就要求任何一张表都应该有主键。</p>
+<h5 id="主键的分类"><a href="#主键的分类" class="headerlink" title="主键的分类"></a>主键的分类</h5><pre><code>根据主键字段的字段数量划分：
+    单一主键
+    复合主键（多个字段联合起来添加一个主键，违背三范式）
+根据主键性质划分：
+    自然主键
+    业务主键：主键值和系统的业务挂钩。最好不要拿和业务挂钩的字段作为主键。因为以后的业务一旦发生改变的时候，主键值可能也需要随着发生变化，但有的时候没有办法变化，因为变化可能会导致主键值重复。</code></pre><p> 一张表的主键只能有一个。<br> MySQL提供主键值自增：</p>
+<pre><code>create table t_user(
+        id int primary key auto_increment, //id字段自动维护一个自增的数字，从1开始，以1递增。
+        username varchar(255)
+    );
+
+insert into t_user(username) values('张三');
+insert into t_user(username) values('李四');
+select * from t_user;</code></pre><h4 id="列级约束"><a href="#列级约束" class="headerlink" title="列级约束"></a>列级约束</h4><pre><code>create table t_user(
+            id int primary key,
+            username varchar(255),
+            email varchar(255)
+        );</code></pre><h4 id="表级约束"><a href="#表级约束" class="headerlink" title="表级约束"></a>表级约束</h4><pre><code>create table t_user(
+            id int,
+            username varchar(255),
+            primary key(id)
+        );
+
+复合主键(了解即可)：
+create table t_user(
+                id int,
+                username varchar(255),
+                eamil varchar(255),
+                primary key(id,username)
+            );</code></pre><h3 id="外键约束FK-foreign-key"><a href="#外键约束FK-foreign-key" class="headerlink" title="外键约束FK(foreign key)"></a>外键约束FK(foreign key)</h3><p>给某个字段添加外键约束之后，该字段称为外键字段，外键字段中的数据称为外键值。<br>外键可以为NULL。外键字段引用其他表的某个字段的时候，被引用的字段不一定是主键，但至少具有unique约束。</p>
+<pre><code>create table t_class(
+        cno int,
+        cname varchar(255),
+        primary key(cno)
+        );
+
+create table t_stu(
+        sno int,
+        sname varchar(255),
+        classno int,
+        primary key(sno),
+        foreign key(classno) references t_class
+        );
+t_stu中的classno字段引用t_class表中的cno字段，此时t_stu表叫做子表。t_class表叫做父表。</code></pre><h1 id="十一、事务-Transaction"><a href="#十一、事务-Transaction" class="headerlink" title="十一、事务(Transaction)"></a>十一、事务(Transaction)</h1><p>一个事务是一个完整的业务逻辑单元，不可再分。事务的存在是为了保证数据的完整性，安全性。<br>和事务相关的语句只有DML语句。[insert delete update]因为这三个语句都是和数据库表当中的“数据”相关的。</p>
+<pre><code>事务中存在一些概念：
+    事务（Transaction）：一批操作（一组DML）
+    开启事务（Start Transaction）[关闭自动提交机制。]
+    回滚事务（rollback）
+    提交事务（commit）
+    SET AUTOCOMMIT：禁用或启用事务的自动提交模式。mysql事务默认情况下是自动提交的。</code></pre><p>例如银行转账，要么同时成功，要么同时失败。<br>要想保证同时成功或者同时失败，那么就需要使用数据库的“事务机制”。</p>
+<h2 id="1、事务的特性：ACID"><a href="#1、事务的特性：ACID" class="headerlink" title="1、事务的特性：ACID"></a>1、事务的特性：ACID</h2><p>A：原子性，事务是最小的工作单元，不可再分。<br>C：一致性，事务必须保证多条DML语句同时成功或者同时失败。<br>I：隔离性，事务A与事务B之间具有隔离。<br>D：持久性，在事务完成以后，该事务对数据库所作的更改将持久地保存在数据库之中，并不会被回滚。</p>
+<h2 id="2、事务的隔离级别"><a href="#2、事务的隔离级别" class="headerlink" title="2、事务的隔离级别"></a>2、事务的隔离级别</h2><p>事务隔离性存在隔离级别。</p>
+<p>理论上隔离级别包括4个：</p>
+<pre><code>            第一级别：读未提交（read uncommitted）
+                对方事务还没有提交，我们当前事务可以读取到对方未提交的数据。
+                读未提交存在脏读（Dirty Read）现象：表示读到了脏的数据。
+            第二级别：读已提交（read committed）
+                对方事务提交之后的数据我方可以读取到。
+                这种隔离级别解决了: 脏读现象没有了。
+                读已提交存在的问题是：不可重复读。
+            第三级别：可重复读（repeatable read）
+                这种隔离级别解决了：不可重复读问题。
+                这种隔离级别存在的问题是：读取到的数据是幻象。
+            第四级别：序列化读/串行化读（serializable） 
+                解决了所有问题。
+                效率低。需要事务排队。
+
+            oracle数据库默认的隔离级别是：读已提交。
+            mysql数据库默认的隔离级别是：可重复读。</code></pre><p>–脏读取（Dirty Read）<br>    一个事务开始读取了某行数据，但是另外一个事务已经更新了此数据但没有能够及时提交，这就出现了脏读取。<br>–不可重复读（Non-repeatable Read）<br>    在同一个事务中，同一个读操作对同一个数据的前后两次读取产生了不同的结果，这就是不可重复读。<br>–幻像读（Phantom Read）<br>    幻像读是指在同一个事务中以前没有的行，由于其他事务的提交而出现的新行。</p>
+<h1 id="十二、索引"><a href="#十二、索引" class="headerlink" title="十二、索引"></a>十二、索引</h1><p>索引就相当于一本书的目录，通过目录可以快速的找到对应的资源。</p>
+<pre><code>创建索引：
+create index 索引名称 on 表名(字段名);
+
+删除索引：
+drop index 索引名称 on 表名;</code></pre><p>A、主键和具有unique约束的字段自动会添加索引。<br>B、根据主键查询效率较高。尽量根据主键检索。<br>C、模糊查询时，第一个通配符使用的是%，这时索引是失效的。<br>D、索引底层采用的数据结构是：B + Tree。</p>
+<h2 id="1、添加索引的条件"><a href="#1、添加索引的条件" class="headerlink" title="1、添加索引的条件"></a>1、添加索引的条件</h2><p>a、表中该字段中的数据量庞大<br>b、经常被检索，经常出现在where子句中的字段<br>c、经常被DML操作的字段不建议添加索引</p>
+<h2 id="2、索引的实现原理"><a href="#2、索引的实现原理" class="headerlink" title="2、索引的实现原理"></a>2、索引的实现原理</h2><p>通过B Tree缩小扫描范围，底层索引进行了排序，分区，索引会携带数据在表中的“物理地址”，最终通过索引检索到数据之后，获取到关联的物理地址，通过物理地址定位表中的数据，效率是最高的。</p>
+<h2 id="3、索引的分类"><a href="#3、索引的分类" class="headerlink" title="3、索引的分类"></a>3、索引的分类</h2><pre><code>单一索引：给单个字段添加索引。
+复合索引：给多个字段联合起来添加一个索引。
+主键索引：主键上会自动添加索引。
+唯一索引：有unique约束的字段上会自动添加索引。
+......</code></pre><h2 id="4、查看索引"><a href="#4、查看索引" class="headerlink" title="4、查看索引"></a>4、查看索引</h2><pre><code>show index from 表名;
+
+查看sql语句的执行情况：
+explain select 字段 from 表名 where 条件;</code></pre><h1 id="十三、视图-index"><a href="#十三、视图-index" class="headerlink" title="十三、视图(index)"></a>十三、视图(index)</h1><p>站在不同的角度去看数据。（同一张表的数据，通过不同的角度去看待）</p>
+<pre><code>创建视图：
+create view 视图名 as select语句;
+
+修改视图：
+alter view 视图名 as select语句;
+
+删除视图：
+drop view 视图名;</code></pre><p>对视图进行增删改查【可以对视图进行CRUD操作】，会影响到原表的数据。</p>
+<p>视图的作用：<br>视图可以隐藏表的实现细节。保密级别较高的系统，数据库只对外提供相关的视图，java程序员只对视图对象进行CRUD。</p>
+<h1 id="十四、数据库设计三范式"><a href="#十四、数据库设计三范式" class="headerlink" title="十四、数据库设计三范式"></a>十四、数据库设计三范式</h1><p>设计范式：设计表的依据，按照这个三范式设计的表不会出现数据冗余。</p>
+<h2 id="1、第一范式"><a href="#1、第一范式" class="headerlink" title="1、第一范式"></a>1、第一范式</h2><p>数据库表中不能出现重复记录，每个字段是原子性的不能再分。</p>
+<h2 id="2、第二范式"><a href="#2、第二范式" class="headerlink" title="2、第二范式"></a>2、第二范式</h2><p>第二范式是建立在第一范式基础上的，另外要求所有非主键字段完全依赖主键，不能产生部分依赖。</p>
+<pre><code>多对多？三张表，关系表两个外键。</code></pre><h2 id="3、第三范式"><a href="#3、第三范式" class="headerlink" title="3、第三范式"></a>3、第三范式</h2><p>建立在第二范式基础上的，非主键字段不能传递依赖于主键字段，不要产生传递依赖。</p>
+<pre><code>一对多？两张表，多的表加外键。</code></pre><h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p>第一范式：有主键，具有原子性，字段不可分割。<br>第二范式：完全依赖，没有部分依赖。<br>第三范式：没有传递依赖。</p>
+<pre><code>一对一设计：
+    主键共享；
+    外键唯一。</code></pre><p>在实际的开发中，以满足客户的需求为主，有的时候会拿冗余换执行速度，最终用目的要满足客户需求。</p>
+<h1 id="十五、DBA命令"><a href="#十五、DBA命令" class="headerlink" title="十五、DBA命令"></a>十五、DBA命令</h1><h2 id="1、新建用户"><a href="#1、新建用户" class="headerlink" title="1、新建用户"></a>1、新建用户</h2><p>语法格式：</p>
+<pre><code>create user 用户名 identified by '密码';
+密码可以为空,如果为空则该用户可以不需要密码登陆服务器.</code></pre><h2 id="2、授权"><a href="#2、授权" class="headerlink" title="2、授权"></a>2、授权</h2><p>语法格式：</p>
+<pre><code>grant all 权限 on 数据库名.表名 to '用户名'@'登录ip' identified by '密码' with grant option;
+
+grant all privileges on dbname.tbname to 'username'@'login ip' identified by 'password' with grant option;
+
+1)dbname=*表示所有数据库
+2)tbname=*表示所有表
+3)login ip=%表示任何ip
+4)password为空，表示不需要密码即可登录
+5)with grant option;  表示该用户还可以授权给其他用户
+
+
+ privileges包括：
+1)    alter：修改数据库的表
+2)    create：创建新的数据库或表
+3)    delete：删除表数据
+4)    drop：删除数据库/表
+5)    index：创建/删除索引
+6)    insert：添加表数据
+7)    select：查询表数据
+8)    update：更新表数据
+9)    all：允许任何操作
+10)    usage：只允许登录</code></pre><h2 id="3、回收权限"><a href="#3、回收权限" class="headerlink" title="3、回收权限"></a>3、回收权限</h2><p>语法格式：</p>
+<pre><code>revoke privileges on dbname[.tbname] from username;</code></pre><h2 id="4、将数据库当中的数据导出"><a href="#4、将数据库当中的数据导出" class="headerlink" title="4、将数据库当中的数据导出"></a>4、将数据库当中的数据导出</h2><p>无需登录MySQL。</p>
+<pre><code>导出整个库：
+mysqldump 数据库名&gt;路径 -u用户名 -p密码
+
+导出指定库中的表：
+mysqldump 数据库名.表名&gt;路径 -u用户名 -p密码</code></pre><h2 id="5、导入数据"><a href="#5、导入数据" class="headerlink" title="5、导入数据"></a>5、导入数据</h2><p>语法格式：</p>
+<pre><code>source .sql文件绝对路径</code></pre>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    /* #vcomments .vwrap {
+        box-sizing: border-box;
+        padding: 0 0 44px;
+        background-color: #F0FFF0;
+    }
+    #vcomments .vwrap .vheader{width: 80%;bottom:0;position: absolute;background: #F0FFF0;}
+
+    #vcomments .vinput{padding:10px 15px; text-align: center;}
+
+    #vcomments .vwrap .vheader .vinput{border-bottom:0px}
+
+    #vcomments .vwrap .vedit .vctrl{margin-top:-44px;right:0;position:absolute;margin-right:-3px;}
+
+    #vcomments  .vwrap .vrow{position:absolute;right:0;bottom:0;width:20%;padding-top:0px;}
+
+    #vcomments  .vrow {font-size: 0;padding: 0px 0;}
+
+    #vcomments  .vicon {margin-right: 15px;}
+
+    #vcomments  .vrow .vcol.vcol-30{display: none}
+
+    #vcomments  .vedit .vctrl span.vpreview-btn{display: none}
+
+    #vcomments  .vrow .vcol.vcol-70{width: 100%;}
+
+    #vcomments  .vsubmit.vbtn{border-radius: 0;padding: 0;color: #fff;line-height: 44px;width:100%;border: none;background:#00ecbc;}
+
+    #vcomments  .vcards .vcard .vh .vhead .vsys{background: #F0FFF0;}
+
+    #vcomments  .vcards .vcard .vh .vmeta .vat{font-size: 12px;display: block;margin-left: 15px;float: right;color: #fff;background-color: #00ecbc;line-height: 20px;padding: 0 6px;border-radius: 3px;}
+
+    @media screen and (max-width: 520px){
+    #vcomments  .vwrap .vheader .vinput{width: 33.33%;padding:10px 5px;}  
+    } */
+
+    #vcomments input[type=text],
+
+    #vcomments input[type=email],
+
+    #vcomments input[type=url],
+
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+    #vcomments .vwrap p {
+        height: 20px;
+        width: 20px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    /* 修复评论第一行位置错位 */
+    .v .vlist .vcard {
+    padding-top: 2.5em !important ;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        admin_email: '2292807998@qq.com',
+        appId: 'vDtNtruYzjCbFJbWyeQ8Bybw-gzGzoHsz',
+        appKey: 'TJv4iKCEAYMHDhy8V8IvAJGF',
+        path: window.location.pathname,
+        comment_count: true,
+        notify: 'false' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'retro',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'ヾﾉ≧∀≦)o在这里可以留言评论喔！',
+
+    });
+    $(document).ready(function(){
+        $("#vcomments").on('click', 'span.vat',function(){
+            $(this).parent('div.vmeta').next("div.vcontent").after($("div.vwrap"));
+            $('textarea#veditor').focus();
+        })
+    })
+</script>
+<!-- <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+    jinrishici.load(function(result) {
+        var jrsc_plac =  result.data.content + "\n「" + result.data.origin.title + "」" + result.data.origin.dynasty + " · " + result.data.origin.author
+        document.getElementById("veditor").setAttribute("placeholder",jrsc_plac);
+    });
+</script> -->
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/archives/ce5a596e/">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/lskjwp/image@master/imageCover/JavaSE进阶学习.jpg" class="responsive-img" alt="JavaSE进阶学习笔记">
+                        
+                        <span class="card-title">JavaSE进阶学习笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            学习视频链接：B站 动力节点   遇见狂神说
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/archives/6775be0b/">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/lskjwp/image@master/imageCover/Centos7下Hadoop安装.jpg" class="responsive-img" alt="Centos7下Hadoop安装与伪分布式集群搭建">
+                        
+                        <span class="card-title">Centos7下Hadoop安装与伪分布式集群搭建</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Hadoop安装与伪分布式集群搭建
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Hadoop/" class="post-category">
+                                    Hadoop
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Centos/">
+                        <span class="chip bg-color">Centos</span>
+                    </a>
+                    
+                    <a href="/tags/Hadoop/">
+                        <span class="chip bg-color">Hadoop</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" >
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down" >
+        <a class="btn-floating btn-large waves-effect waves-light" title="展开/关闭TOC">
+            <i class="fas fa-list-ul" style="zoom: 0.88;"></i>
+        </a>
+    </div>
+<!-- <div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div> -->
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="6668004913"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">勇也很努力</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">317.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv" style="display: none;">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv" style="display:none">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "7";
+                    var startDate = "1";
+                    var startHour = "14";
+                    var startMinute = "24";
+                    var startSecond = "48";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2292807998@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2292807998" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2292807998" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<script>
+    /*
+    修改不蒜子初始化计数
+    */
+    $(document).ready(function () {
+
+        var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+        var pvcountOffset = 3000;  // 初始化首次数据
+        var uvcountOffset = 1100;
+
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int); // 停止检测
+            }
+        }
+    });
+</script>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" title="返回顶部">
+        <i class="fas fa-arrow-up" style="zoom: 0.88;"></i>
+    </a>
+</div>
+
+    <!-- <script src="/js/fireworks.js"></script> -->
+    <!-- <script src="/js/cursor.js"></script> -->
+    <!-- <script src="/js/click_show_text.js"></script> -->
+    <!-- <script src="/js/snow.js"></script> -->
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "f9383031"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <script type="text/javascript">
+        var OriginTitile=document.title,st;
+        document.addEventListener("visibilitychange",function(){
+            document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+        })
+    </script>
+
+    <!--夜晚模式-->
+    <script>
+        if (localStorage.getItem('dark') === '1') {
+        document.body.classList.add('dark');
+        }
+        else if (new Date().getHours() >= 22 || new Date().getHours() < 7) {
+        document.body.classList.add('dark');
+        } 
+        else if (matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+        }
+    </script>
+
+    <!--全屏-->
+    <script src="/js/fullscreen.js" type="module"></script>
+    <a onclick="switchNightMode()" id="sma">
+        <i class="fa fa-moon-o" id="nightMode" aria-hidden="true"></i>
+    </a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>
